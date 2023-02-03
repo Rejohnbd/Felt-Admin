@@ -1,0 +1,161 @@
+{
+  "navbar": {
+    "search": {
+      "text": "অনুসন্ধান করুন..."
+    },
+    "dropdown": {
+      "createnew": {
+        "text": "নতুন তৈরী করা",
+        "list": {
+          "projects": "নতুন প্রকল্প",
+          "users": "ব্যবহারকারী তৈরি করুন",
+          "revenue": "রাজস্ব প্রতিবেদন",
+          "settings": "সেটিংস",
+          "help": "সাহায্য সহযোগীতা"
+        }
+      },
+      "megamenu": {
+        "text": "মেগা মেনু",
+        "uicontent": {
+          "title": "UI উপাদান",
+          "list": {
+            "widgets": "উইজেট",
+            "nestable": "নেস্টেবল তালিকা",
+            "rangeslider": "রেঞ্জ স্লাইডার",
+            "masonry": "রাজমিস্ত্রি আইটেম",
+            "sweetalert": "মিষ্টি সতর্কতা",
+            "treeview": "ট্রিভিউ পৃষ্ঠা",
+            "tour": "ট্যুর পেজ"
+          }
+        },
+        "application": {
+          "title": "অ্যাপ্লিকেশন",
+          "list": {
+            "ecommerce": "ইকমার্স পেজ",
+            "crm": "CRM পেজ",
+            "email": "ইমেইল",
+            "calendar": "ক্যালেন্ডার",
+            "contacts": "টিম পরিচিতি",
+            "tasks": "টাস্ক বোর্ড",
+            "template": "ইমেল টেমপ্লেট"
+          }
+        },
+        "extrapages": {
+          "title": "অতিরিক্ত পৃষ্ঠা",
+          "list": {
+            "leftsidebaruser": "ব্যবহারকারীর সাথে বাম সাইডবার",
+            "collapsed": "মেনু সঙ্কুচিত হয়েছে৷",
+            "leftsidebar": "ছোট বাম সাইডবার",
+            "header": "নতুন হেডার স্টাইল",
+            "search": "অনুসন্ধান ফলাফল",
+            "gallery": "গ্যালারি পাতা",
+            "maintenance": "রক্ষণাবেক্ষণ এবং শীঘ্রই আসছে"
+          }
+        },
+        "discount": "বিশেষ ডিসকাউন্ট সেল!",
+        "subtext": "70% পর্যন্ত ছাড় সংরক্ষণ করুন",
+        "buttontext": "এখনই ডাউনলোড করুন"
+      },
+      "site": {
+        "list": {
+          "github": "গিটহাব",
+          "bitbucket": "বিট বালতি",
+          "dribbble": "ড্রিবল",
+          "dropbox": "ড্রপবক্স",
+          "g-suite": "G Suite",
+          "slack": "স্ল্যাক"
+        }
+      },
+      "notification": {
+        "badge": "5",
+        "text": "বিজ্ঞপ্তি",
+        "subtext": "সব পরিষ্কার করে দাও",
+        "1": {
+          "title": "Doug Dukes commented on Admin Dashboard",
+          "text": "1 min ago"
+        },
+        "2": {
+          "title": "Mario Drummond",
+          "text": "Hi, How are you? What about our next meeting"
+        },
+        "3": {
+          "title": "Karen Robinson",
+          "text": "Wow ! this admin looks good and awesome design"
+        },
+        "4": {
+          "title": "New user registered.",
+          "text": "5 hours ago"
+        },
+        "5": {
+          "title": "Caleb Flakelar commented on Admin",
+          "text": "4 days ago"
+        },
+        "6": {
+          "title": "Carlos Crouch liked",
+          "text": "13 days ago"
+        },
+        "button": "সব পরিষ্কার করে দাও"
+      },
+      "name": {
+        "text": "Nik Patel",
+        "list": {
+          "greet": "স্বাগত!",
+          "account": "আমার অ্যাকাউন্ট",
+          "mywallet": "আমার মানিব্যাগ",
+          "settings": "সেটিংস",
+          "lockscreen": "বন্ধ পর্দা",
+          "logout": "প্রস্থান"
+        }
+      }
+    }
+  },
+  "menuitems": {
+    "navigation": {
+      "text": "নেভিগেশন"
+    },
+    "dashboard": {
+      "text": "ড্যাশবোর্ড",
+      "badge": "3",
+      "list": {
+        "sales": "বিক্রয়",
+        "crm": "সিআরএম",
+        "analytics": "বিশ্লেষণ"
+      }
+    },
+    "apps": {
+      "text": "অ্যাপস"
+    },
+    "chat": {
+      "text": "চ্যাট"
+    },
+    "ecommerce": {
+      "text": "ইকমার্স",
+      "badge": "নতুন",
+      "list": {
+        "products": "পণ্য তালিকা",
+        "productsgrid": "পণ্য গ্রিড"
+      }
+    },
+    "email": {
+      "text": "ইমেইল",
+      "list": {
+        "inbox": "ইনবক্স",
+        "reademail": "ইমেইল পড়ুন",
+        "template": "ইমেল টেমপ্লেট"
+      }
+    },
+    "multilevel": {
+      "text": "Multi Level",
+      "list": {
+        "level1": {
+          "1": "Level 1.1",
+          "2": "Level 1.2",
+          "level2": {
+            "1": "Level 2.1",
+            "2": "Level 2.2"
+          }
+        }
+      }
+    }
+  }
+}
