@@ -363,7 +363,6 @@
                             </h6>
                             <b-form-radio-group v-model="layout" stacked @input="changeLayout($event)">
                                 <b-form-radio value="vertical" class="mb-1">Vertical</b-form-radio>
-                                <b-form-radio value="horizontal" class="mb-1">Horizontal</b-form-radio>
                                 <b-form-radio value="detached" class="mb-1">Detached</b-form-radio>
                                 <b-form-radio value="two-column" class="mb-1">Two Column</b-form-radio>
                             </b-form-radio-group>
@@ -387,28 +386,27 @@
                                 <b-form-radio value="fixed" class="mb-1">Fixed</b-form-radio>
                                 <b-form-radio value="scrollable" class="mb-1">Scrollable</b-form-radio>
                             </b-form-radio-group>
-                            <div v-if="layout !== 'horizontal'">
-                                <h6 class="font-weight-medium font-14 mt-4 mb-2 pb-1">
-                                    Left Sidebar Color
-                                </h6>
-                                <b-form-radio-group v-model="sidebarType" stacked @input="changeType($event)">
-                                    <b-form-radio value="dark" class="mb-1">Dark</b-form-radio>
-                                    <b-form-radio value="light" class="mb-1">Light</b-form-radio>
-                                    <b-form-radio value="brand" class="mb-1">Brand</b-form-radio>
-                                    <b-form-radio value="gradient" class="mb-1">Gradient</b-form-radio>
-                                </b-form-radio-group>
 
-                                <h6 class="font-weight-medium font-14 mt-4 mb-2 pb-1">
-                                    Left Sidebar Size
-                                </h6>
-                                <b-form-radio-group v-model="sidebarSize" stacked @input="changeSize($event)">
-                                    <b-form-radio value="default" class="mb-1">Default</b-form-radio>
-                                    <b-form-radio value="condensed" class="mb-1">Condensed <small>(Extra Small
-                                            size)</small></b-form-radio>
-                                    <b-form-radio value="compact" class="mb-1">Compact <small>(Small
-                                            size)</small></b-form-radio>
-                                </b-form-radio-group>
-                            </div>
+                            <h6 class="font-weight-medium font-14 mt-4 mb-2 pb-1">
+                                Left Sidebar Color
+                            </h6>
+                            <b-form-radio-group v-model="sidebarType" stacked @input="changeType($event)">
+                                <b-form-radio value="dark" class="mb-1">Dark</b-form-radio>
+                                <b-form-radio value="light" class="mb-1">Light</b-form-radio>
+                                <b-form-radio value="brand" class="mb-1">Brand</b-form-radio>
+                                <b-form-radio value="gradient" class="mb-1">Gradient</b-form-radio>
+                            </b-form-radio-group>
+
+                            <h6 class="font-weight-medium font-14 mt-4 mb-2 pb-1">
+                                Left Sidebar Size
+                            </h6>
+                            <b-form-radio-group v-model="sidebarSize" stacked @input="changeSize($event)">
+                                <b-form-radio value="default" class="mb-1">Default</b-form-radio>
+                                <b-form-radio value="condensed" class="mb-1">Condensed <small>(Extra Small
+                                        size)</small></b-form-radio>
+                                <b-form-radio value="compact" class="mb-1">Compact <small>(Small
+                                        size)</small></b-form-radio>
+                            </b-form-radio-group>
 
                             <h6 class="font-weight-medium font-14 mt-4 mb-2 pb-1">
                                 Sidebar User Info

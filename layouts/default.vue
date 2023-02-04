@@ -4,10 +4,6 @@
             <Nuxt />
         </Vertical>
 
-        <Horizontal v-if="layout.layoutType === 'horizontal'" :layout="layout.layoutType">
-            <slot />
-        </Horizontal> 
-
         <Detached v-if="layout.layoutType === 'detached'" :layout="layout.layoutType">
             <slot />
         </Detached>
@@ -21,14 +17,12 @@
 <script>
     import { mapState } from "vuex";
     import Vertical from "./vertical";
-    import Horizontal from "./horizontal";
     import Detached from "./detached";
     import TwoColumn from "./two-column";
 
     export default {
         components: {
             Vertical,
-            Horizontal,
             Detached,
             TwoColumn,
         },

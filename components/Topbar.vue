@@ -562,13 +562,6 @@
                 this.flag = flag;
             },
             /**
-             * Horizontal-toggle menu
-             */
-            horizonalmenu() {
-                let element = document.getElementById("topnav-menu-content");
-                element.classList.toggle("show");
-            },
-            /**
              * Logout user
              */
             logoutUser() {
