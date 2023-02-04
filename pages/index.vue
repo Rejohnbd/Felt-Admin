@@ -1,5 +1,8 @@
 <template>
-  <PageHeader :title="title" :items="items" />
+  <PageHeader 
+    :title="title" 
+    :items="items" 
+  />
 </template>
 
 <script>

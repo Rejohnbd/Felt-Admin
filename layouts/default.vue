@@ -19,36 +19,32 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+    import { mapState } from "vuex";
+    import Vertical from "./vertical";
+    import Horizontal from "./horizontal";
+    import Detached from "./detached";
+    import TwoColumn from "./two-column";
 
-import Vertical from "./vertical";
-import Horizontal from "./horizontal";
-import Detached from "./detached";
-import TwoColumn from "./two-column";
-
-/**
- * Default Layout
- */
-export default {
-    components: {
-        Vertical,
-        Horizontal,
-        Detached,
-        TwoColumn,
-    },
-    data() {
-        return {
+    export default {
+        components: {
+            Vertical,
+            Horizontal,
+            Detached,
+            TwoColumn,
+        },
+        data() {
+            return {
+            }
+        },
+        computed: mapState(["layout"]),
+        mounted() {
+            if (this.$route.query.layout) {
+                this.$store.dispatch('layout/changeLayoutType', {
+                    layoutType: this.$route.query.layout
+                })
+            }
         }
-    },
-    computed: mapState(["layout"]),
-    mounted() {
-        if (this.$route.query.layout) {
-            this.$store.dispatch('layout/changeLayoutType', {
-                layoutType: this.$route.query.layout
-            })
-        }
-    }
-};
+    };
 </script>
 
 
