@@ -1,10 +1,10 @@
 export default {
-  loading: "~/components/Loading.vue",
-  mode: "spa",
+  // loading: "~/components/Loading.vue",
+  ssr: false,
   target: "server",
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: "vts-admin",
+    title: "Felt Management",
     htmlAttrs: {
       lang: "en",
     },
@@ -36,7 +36,15 @@ export default {
     // https://go.nuxtjs.dev/axios
     "@nuxtjs/axios",
     "@nuxtjs/i18n",
+    "vue-toastification/nuxt",
+    "@nuxtjs/auth-next",
   ],
+
+  // Route Auth
+  router: {
+    middleware: ["auth"],
+  },
+
   i18n: {
     locales: ["en", "bn"],
     defaultLocale: "en",
@@ -49,10 +57,31 @@ export default {
     },
   },
 
+  auth: {
+    redirect: {
+      login: "/auth/login",
+      logout: "/auth/login",
+      callback: false,
+      home: false,
+    },
+    strategies: {
+      laravelSanctum: {
+        provider: "laravel/sanctum",
+        url: "http://localhost:8000",
+        endpoints: {
+          login: {
+            url: "/login",
+          },
+        },
+      },
+    },
+  },
+
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: "/",
+    baseURL: "http://localhost:8000",
+    credential: true,
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

@@ -13,6 +13,8 @@
 
 <script>
     export default {
+        name: "auth",
+        auth: 'guest',
         data() {
             return {
                 // 

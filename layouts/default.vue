@@ -21,6 +21,7 @@
     import TwoColumn from "./two-column";
 
     export default {
+        middleware: 'auth',
         components: {
             Vertical,
             Detached,

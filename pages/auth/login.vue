@@ -20,21 +20,43 @@
                         <p class="text-muted mb-4 mt-3">Enter your Email Address and Password to Access Admin Panel.</p>
                     </div>
 
-                    <form action="#">
+                    <form method="post" @submit.prevent="login">
                         <div class="form-group mb-3">
                             <label for="emailaddress">Email address</label>
-                            <input id="emailaddress" class="form-control" type="email" required
-                                placeholder="Enter your email" />
+                            <input 
+                                v-model="email"
+                                id="emailaddress" 
+                                class="form-control" 
+                                type="email" 
+
+                                placeholder="Enter your email" 
+                            />
                         </div>
 
                         <div class="form-group mb-3">
                             <label for="password">Password</label>
                             <div class="input-group input-group-merge">
-                                <input id="password" type="password" class="form-control"
-                                    placeholder="Enter your password" />
-                                <div class="input-group-append" data-password="false">
+                                <input 
+                                    v-if="showPassword"
+                                    v-model="password"
+                                    id="password" 
+                                    type="text" 
+                                    class="form-control"
+ 
+                                    placeholder="Enter your password" 
+                                />
+                                <input
+                                    v-else
+                                    v-model="password"
+                                    id="password" 
+                                    type="password" 
+                                    class="form-control"
+
+                                    placeholder="Enter your password" 
+                                />
+                                <div class="input-group-append" data-password="false" @click="passwordShow">
                                     <div class="input-group-text">
-                                        <span class="password-eye"></span>
+                                        <span :class="{ 'fas fa-eye': showPassword, 'fas fa-eye-slash': !showPassword}"></span>
                                     </div>
                                 </div>
                             </div>
@@ -52,10 +74,6 @@
                     <p>
                         <nuxt-link to="/auth/recoverpwd" class="text-muted ml-1">Forgot your password?</nuxt-link>
                     </p>
-                    <p class="text-muted">
-                        Home
-                        <nuxt-link to="/" class="text-primary font-weight-medium ml-1">Home</nuxt-link>
-                    </p>
                 </div>
             </div>
         </div>
@@ -66,13 +84,48 @@
 export default {
     name: 'LoginPage',
     layout: "auth",
+    auth: 'guest',
     data() {
-        return {};
+        return {
+            email: '',
+            password: '',
+            showPassword: false
+        };
     },
     head() {
         return {
             title: `Login | Minton - Nuxtjs Responsive Admin Dashboard Template`,
         };
     },
+    mounted(){
+        this.$axios.$get('/sanctum/csrf-cookie');
+    },
+    methods:{
+        passwordShow() {
+            this.showPassword = !this.showPassword;
+        },
+        async login(){
+            this.$nuxt.$loading.start();
+            try{
+                await this.$auth.loginWith('laravelSanctum',{
+                    data: {
+                        email: this.email,
+                        password: this.password
+                    }
+                }).then((response) => {
+                    this.$toast.info(response.data.message);
+                    this.$router.push({
+                        path: "/",
+                    });
+                });
+            } catch(error) {
+                this.email = '';
+                this.password = '';
+                this.$toast.error(error.response.data.message);
+                // console.log('LogIn error:', JSON.stringify(error.response));
+            }
+            this.$nuxt.$loading.finish();
+        }
+    }
 };
 </script>

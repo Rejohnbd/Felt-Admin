@@ -1,13 +1,15 @@
 <template>
-  <PageHeader 
-    :title="title" 
-    :items="items" 
-  />
+  <div>
+      <PageHeader :title="title" :items="items" />
+      <h1>Welcome {{ $auth.user.name }}</h1>
+  </div>
+
 </template>
 
 <script>
 export default {
   name: 'IndexPage',
+  middleware: 'auth',
   data() {
     return {
       title: 'Starter',
