@@ -9,7 +9,7 @@
 <script>
 export default {
   name: 'IndexPage',
-  middleware: 'auth',
+  middleware: ['auth'],
   data() {
     return {
       title: 'Starter',

@@ -20,37 +20,51 @@
                         <p class="text-muted mb-4 mt-3">Enter your Email Address and Password to Access Admin Panel.</p>
                     </div>
 
-                    <form method="post" @submit.prevent="login">
+                    <form @submit.prevent="login">
                         <div class="form-group mb-3">
-                            <label for="emailaddress">Email address</label>
+                            <label for="emailaddress">
+                                Email address
+                                <span class="text-danger">*</span>
+                            </label>
+
                             <input 
-                                v-model="email"
+                                v-model="form.email"
                                 id="emailaddress" 
                                 class="form-control" 
+                                :class="{ 'is-invalid': submitForm && $v.form.email.$error }"
                                 type="email" 
 
                                 placeholder="Enter your email" 
                             />
+                            <div v-if="submitForm && $v.form.email.$error" class="invalid-feedback">
+                                <span v-if="!$v.form.email.required">Email is required.</span>
+                                <span v-if="!$v.form.email.email">Must be a valid email.</span>
+                            </div>
                         </div>
 
                         <div class="form-group mb-3">
-                            <label for="password">Password</label>
+                            <label for="password">
+                                Password
+                                <span class="text-danger">*</span>
+                            </label>
                             <div class="input-group input-group-merge">
                                 <input 
                                     v-if="showPassword"
-                                    v-model="password"
+                                    v-model="form.password"
                                     id="password" 
                                     type="text" 
                                     class="form-control"
+                                    :class="{ 'is-invalid': submitForm && $v.form.password.$error }"
  
                                     placeholder="Enter your password" 
                                 />
                                 <input
                                     v-else
-                                    v-model="password"
+                                    v-model="form.password"
                                     id="password" 
                                     type="password" 
                                     class="form-control"
+                                    :class="{ 'is-invalid': submitForm && $v.form.password.$error }"
 
                                     placeholder="Enter your password" 
                                 />
@@ -59,7 +73,12 @@
                                         <span :class="{ 'fas fa-eye': showPassword, 'fas fa-eye-slash': !showPassword}"></span>
                                     </div>
                                 </div>
+                                <div v-if="submitForm && $v.form.password.$error" class="invalid-feedback">
+                                    <span v-if="!$v.form.password.required">Password is required.</span>
+                                    <span v-if="!$v.form.password.minLength">Password must be at least 6 characters.</span>
+                                </div>
                             </div>
+                            
                         </div>
 
                         <div class="form-group mb-0 text-center">
@@ -81,22 +100,42 @@
 </template>
 
 <script>
+import {
+    required,
+    email,
+    minLength,
+} from 'vuelidate/lib/validators'
+
 export default {
     name: 'LoginPage',
     layout: "auth",
     auth: 'guest',
     data() {
         return {
-            email: '',
-            password: '',
-            showPassword: false
-        };
+            form: {
+                email: '',
+                password: '',
+            },
+            showPassword: false,
+            submitForm: false,
+        }
     },
-    head() {
-        return {
-            title: `Login | Minton - Nuxtjs Responsive Admin Dashboard Template`,
-        };
+    validations: {
+        form: {
+            email: {
+                required,
+                email
+            },
+            password: {
+                required,
+                minLength: minLength(6)
+            }
+        }
     },
+    head: {
+        titleTemplate: '%s Login',
+    },
+    
     mounted(){
         this.$axios.$get('/sanctum/csrf-cookie');
     },
@@ -105,26 +144,41 @@ export default {
             this.showPassword = !this.showPassword;
         },
         async login(){
-            this.$nuxt.$loading.start();
-            try{
-                await this.$auth.loginWith('laravelSanctum',{
-                    data: {
-                        email: this.email,
-                        password: this.password
-                    }
-                }).then((response) => {
-                    this.$toast.info(response.data.message);
-                    this.$router.push({
-                        path: "/",
+            this.submitForm = true;
+            this.$v.$touch();
+            if (!this.$v.$invalid) {
+                this.$nuxt.$loading.start();
+                try{
+                    await this.$auth.loginWith('laravelSanctum',{
+                        data: {
+                            email: this.form.email,
+                            password: this.form.password
+                        }
+                    }).then((response) => {
+                        this.$toast.info(response.data.message);
+                        this.$router.push({
+                            path: "/",
+                        });
+                    }).catch((error) => {
+                        if (error.response.status == 401){
+                            this.$toast.error(error.response.data.message);
+                        } else {
+                            this.$toast.error("Connection Error");
+                            this.form.email = '';
+                            this.form.password = '';
+                        }
+                        console.log('in catch');
+                        console.log(error.response);
                     });
-                });
-            } catch(error) {
-                this.email = '';
-                this.password = '';
-                this.$toast.error(error.response.data.message);
-                // console.log('LogIn error:', JSON.stringify(error.response));
+                } catch(error) {
+                    this.form.email = '';
+                    this.form.password = '';
+                    this.submitForm = false;
+                    this.$toast.error("Connection Error");
+                    console.log('Connection Error:', error);
+                }
+                this.$nuxt.$loading.finish();
             }
-            this.$nuxt.$loading.finish();
         }
     }
 };

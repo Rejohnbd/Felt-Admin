@@ -4,7 +4,7 @@ export default {
   target: "server",
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: "Felt Management",
+    title: "Felt Management :: ",
     htmlAttrs: {
       lang: "en",
     },
@@ -21,7 +21,11 @@ export default {
   css: ["~/assets/scss/app.scss"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ["~/plugins/simplebar.js", "~/plugins/vue-click-outside.js"],
+  plugins: [
+    "~/plugins/simplebar.js",
+    "~/plugins/vue-click-outside.js",
+    "~/plugins/vuelidate.js",
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -62,7 +66,7 @@ export default {
       login: "/auth/login",
       logout: "/auth/login",
       callback: false,
-      home: false,
+      home: "/",
     },
     strategies: {
       laravelSanctum: {
