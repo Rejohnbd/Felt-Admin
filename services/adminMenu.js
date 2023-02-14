@@ -1,4 +1,4 @@
-export const menuItems = [
+export const adminMenu = [
   {
     id: 1,
     label: "menuitems.navigation.text",

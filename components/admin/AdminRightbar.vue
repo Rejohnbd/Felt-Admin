@@ -429,6 +429,7 @@
 
 <script>
     export default {
+        name: 'AdminRightbar',
         data() {
             return {
                 config: {

@@ -56,7 +56,7 @@
 
             <div id="sidebar-menu">
                 <ul class="list-unstyled" id="side-menu">
-                    <template v-for="item in menuItems">
+                    <template v-for="item in adminMenu">
                         <li class="menu-title" v-if="item.isTitle" :key="item.id">{{ $t(item.label) }}</li>
                         <li v-if="!item.isTitle && !item.isLayout" :key="item.id">
                             <a 
@@ -123,12 +123,13 @@
 
 <script>
     import { mapState } from "vuex";
-    import { menuItems } from "../services/menu";
+    import { adminMenu } from "../../services/adminMenu";
 
     export default {
+        name: 'AdminSidebar',
         data() {
             return {
-                menuItems: menuItems,
+                adminMenu: adminMenu,
             };
         },
         props: {

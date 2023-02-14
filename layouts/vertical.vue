@@ -1,6 +1,6 @@
 <template>
-    <div id="wrapper">
-        <Sidebar 
+    <div id="wrapper" v-if="$auth.user.user_role.slug == 'admin'">
+        <AdminSidebar 
             :type="layout.leftSidebarType" 
             :width="layout.layoutWidth" 
             :size="layout.leftSidebarSize"
@@ -9,22 +9,33 @@
         />
         <div class="content-page">
             <div class="content">
-                <Topbar />
+                <AdminTopbar />
                 <div class="container-fluid">
                     <Nuxt />
                 </div>
             </div>
-            <Footer />
+            <AdminFooter />
         </div>
-        <Rightbar />
+        <AdminRightbar />
     </div>
 </template>
 
 
 <script>
-    import { mapState } from 'vuex'
+    import { mapState } from 'vuex';
+    import AdminSidebar from "~/components/admin/AdminSidebar";
+    import AdminTopbar from "@/components/admin/AdminTopbar";
+    import AdminFooter from "@/components/admin/AdminFooter";
+    import AdminRightbar from "@/components/admin/AdminRightbar";
+
     export default {
         name: 'vertical',
+        comments: {
+            AdminSidebar,
+            AdminTopbar,
+            AdminFooter,
+            AdminRightbar
+        },
         data() {
             return {
                 isMenuCondensed: false,

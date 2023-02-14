@@ -484,6 +484,7 @@
 
 <script>
     export default {
+        name: 'AdminTopbar',
         data() {
             return {
                 languages: [{

@@ -17,7 +17,7 @@
                                 </span>
                             </nuxt-link>
                         </div>
-                        <p class="text-muted mb-4 mt-3">Enter your Email Address and Password to Access Admin Panel.</p>
+                        <p class="text-muted mb-4 mt-3">Enter your Email and Password to Access Admin Panel.</p>
                     </div>
 
                     <form @submit.prevent="login">
@@ -156,6 +156,7 @@ export default {
                         }
                     }).then((response) => {
                         this.$toast.info(response.data.message);
+                        this.$store.dispatch('login', response.data);
                         this.$router.push({
                             path: "/",
                         });
@@ -178,6 +179,8 @@ export default {
                     console.log('Connection Error:', error);
                 }
                 this.$nuxt.$loading.finish();
+            } else {
+                return;
             }
         }
     }

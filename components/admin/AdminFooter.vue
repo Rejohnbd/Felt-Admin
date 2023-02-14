@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6">
-                    2020 - {{ new Date().getFullYear() }} &copy; Developed by <a href="">CPSD</a>
+                    2020 - {{ new Date().getFullYear() }} &copy; Developed by <a href="https://cpsdbd.com/" target="_blank">CPSD</a>
                 </div>
                 <div class="col-md-6">
                     <div class="text-md-right footer-links d-none d-sm-block">
@@ -18,5 +18,7 @@
 </template>
 
 <script>
-    export default {}
+    export default {
+        name: 'AdminFooter'
+    }
 </script>

@@ -44,6 +44,8 @@ export default {
     "@nuxtjs/auth-next",
   ],
 
+  generate: { fallback: true },
+
   // Route Auth
   router: {
     middleware: ["auth"],

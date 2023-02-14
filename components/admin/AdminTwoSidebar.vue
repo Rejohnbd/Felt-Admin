@@ -673,6 +673,7 @@
 
 <script>
     export default {
+        name: 'AdminTwoSidebar',
         data() {
             return {
                 activetab: 1,
