@@ -1,6 +1,6 @@
 <template>
     <div>
-        <PageHeader :title="title" :items="items" />
+        <DriverPageHeader :title="title" :items="items" />
         <h1>Driver Page Welcome {{ $auth.user.email }}</h1>
     </div>
 

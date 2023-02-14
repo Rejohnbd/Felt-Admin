@@ -12,6 +12,19 @@
         </div>
         <AdminRightbar />
     </div>
+    <div id="wrapper" v-else-if="$auth.user.user_role.slug == 'employee'">
+        <EmployeeTopbar />
+        <EmployeeTwoSidebar />
+        <div class="content-page">
+            <div class="content">
+                <div class="container-fluid">
+                    <Nuxt />
+                </div>
+            </div>
+            <EmployeeFooter />
+        </div>
+        <EmployeeRightbar />
+    </div>
     <div id="wrapper" v-else-if="$auth.user.user_role.slug == 'customer'">
         <CustomerTopbar />
         <CustomerTwoSidebar />
@@ -47,6 +60,11 @@
     import AdminFooter from "@/components/admin/AdminFooter";
     import AdminRightbar from "@/components/admin/AdminRightbar";
 
+    import EmployeeTopbar from "@/components/employee/EmployeeTopbar";
+    import EmployeeTwoSidebar from "@/components/employee/EmployeeTwoSidebar";
+    import EmployeeFooter from "@/components/employee/EmployeeFooter";
+    import EmployeeRightbar from "@/components/employee/EmployeeRightbar";
+
     import CustomerTopbar from "@/components/customer/CustomerTopbar";
     import CustomerTwoSidebar from "@/components/customer/CustomerTwoSidebar";
     import CustomerFooter from "@/components/customer/CustomerFooter";
@@ -64,6 +82,10 @@
             AdminTwoSidebar,
             AdminFooter,
             AdminRightbar,
+            EmployeeTopbar,
+            EmployeeTwoSidebar,
+            EmployeeFooter,
+            EmployeeRightbar,
             CustomerTopbar,
             CustomerTwoSidebar,
             CustomerFooter,
