@@ -25,6 +25,19 @@
         </div>
         <CustomerRightbar />
     </div>
+    <div id="wrapper" v-else-if="$auth.user.user_role.slug == 'driver'">
+        <DriverTopbar />
+        <DriverTwoSidebar />
+        <div class="content-page">
+            <div class="content">
+                <div class="container-fluid">
+                    <Nuxt />
+                </div>
+            </div>
+            <DriverFooter />
+        </div>
+        <DriverRightbar />
+    </div>
 </template>
 
 <script>
@@ -39,6 +52,11 @@
     import CustomerFooter from "@/components/customer/CustomerFooter";
     import CustomerRightbar from "@/components/customer/CustomerRightbar";
 
+    import DriverTopbar from "@/components/driver/DriverTopbar";
+    import DriverTwoSidebar from "@/components/driver/DriverTwoSidebar";
+    import DriverFooter from "@/components/driver/DriverFooter";
+    import DriverRightbar from "@/components/driver/DriverRightbar";
+
     export default {
         name: "Two-column",
         components: {
@@ -49,7 +67,11 @@
             CustomerTopbar,
             CustomerTwoSidebar,
             CustomerFooter,
-            CustomerRightbar
+            CustomerRightbar,
+            DriverTopbar,
+            DriverTwoSidebar,
+            DriverFooter,
+            DriverRightbar
         },
         data() {
             return {

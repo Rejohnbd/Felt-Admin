@@ -37,6 +37,26 @@
         </div>
         <CustomerRightbar />
     </div>
+     <div id="wrapper" v-else-if="$auth.user.user_role.slug == 'driver'">
+        <DriverSidebar 
+            :type="layout.leftSidebarType" 
+            :width="layout.layoutWidth" 
+            :size="layout.leftSidebarSize"
+            :menu="layout.menuPosition" 
+            :topbar="layout.topbar"
+        />
+        <div class="content-page">
+            <div class="content">
+                <DriverTopbar />
+                <div class="container-fluid">
+                    <Nuxt />
+                </div>
+            </div>
+            <DriverFooter />
+        </div>
+        <CustomerRightbar />
+    </div>
+    
 </template>
 
 
@@ -46,10 +66,16 @@
     import AdminTopbar from "@/components/admin/AdminTopbar";
     import AdminFooter from "@/components/admin/AdminFooter";
     import AdminRightbar from "@/components/admin/AdminRightbar";
+
     import CustomerSidebar from "@/components/customer/CustomerSidebar";
     import CustomerTopbar from "@/components/customer/CustomerTopbar";
     import CustomerFooter from "@/components/customer/CustomerFooter";
     import CustomerRightbar from "@/components/customer/CustomerRightbar";
+
+    import DriverSidebar from "@/components/driver/DriverSidebar";
+    import DriverTopbar from "@/components/driver/DriverTopbar";
+    import DriverFooter from "@/components/driver/DriverFooter";
+    import DriverRightbar from "@/components/driver/DriverRightbar";
 
     export default {
         name: 'vertical',
@@ -61,7 +87,11 @@
             CustomerSidebar,
             CustomerTopbar,
             CustomerFooter,
-            CustomerRightbar
+            CustomerRightbar,
+            DriverSidebar,
+            DriverTopbar,
+            DriverRightbar,
+            DriverFooter
         },
         data() {
             return {
