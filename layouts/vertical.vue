@@ -18,6 +18,25 @@
         </div>
         <AdminRightbar />
     </div>
+    <div id="wrapper" v-else-if="$auth.user.user_role.slug == 'customer'">
+        <CustomerSidebar 
+            :type="layout.leftSidebarType" 
+            :width="layout.layoutWidth" 
+            :size="layout.leftSidebarSize"
+            :menu="layout.menuPosition" 
+            :topbar="layout.topbar"
+        />
+        <div class="content-page">
+            <div class="content">
+                <CustomerTopbar />
+                <div class="container-fluid">
+                    <Nuxt />
+                </div>
+            </div>
+            <CustomerFooter />
+        </div>
+        <CustomerRightbar />
+    </div>
 </template>
 
 
@@ -27,6 +46,10 @@
     import AdminTopbar from "@/components/admin/AdminTopbar";
     import AdminFooter from "@/components/admin/AdminFooter";
     import AdminRightbar from "@/components/admin/AdminRightbar";
+    import CustomerSidebar from "@/components/customer/CustomerSidebar";
+    import CustomerTopbar from "@/components/customer/CustomerTopbar";
+    import CustomerFooter from "@/components/customer/CustomerFooter";
+    import CustomerRightbar from "@/components/customer/CustomerRightbar";
 
     export default {
         name: 'vertical',
@@ -34,7 +57,11 @@
             AdminSidebar,
             AdminTopbar,
             AdminFooter,
-            AdminRightbar
+            AdminRightbar,
+            CustomerSidebar,
+            CustomerTopbar,
+            CustomerFooter,
+            CustomerRightbar
         },
         data() {
             return {

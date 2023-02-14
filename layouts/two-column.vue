@@ -12,6 +12,19 @@
         </div>
         <AdminRightbar />
     </div>
+    <div id="wrapper" v-else-if="$auth.user.user_role.slug == 'customer'">
+        <CustomerTopbar />
+        <CustomerTwoSidebar />
+        <div class="content-page">
+            <div class="content">
+                <div class="container-fluid">
+                    <Nuxt />
+                </div>
+            </div>
+            <CustomerFooter />
+        </div>
+        <CustomerRightbar />
+    </div>
 </template>
 
 <script>
@@ -21,13 +34,22 @@
     import AdminFooter from "@/components/admin/AdminFooter";
     import AdminRightbar from "@/components/admin/AdminRightbar";
 
+    import CustomerTopbar from "@/components/customer/CustomerTopbar";
+    import CustomerTwoSidebar from "@/components/customer/CustomerTwoSidebar";
+    import CustomerFooter from "@/components/customer/CustomerFooter";
+    import CustomerRightbar from "@/components/customer/CustomerRightbar";
+
     export default {
         name: "Two-column",
         components: {
             AdminTopbar,
             AdminTwoSidebar,
             AdminFooter,
-            AdminRightbar
+            AdminRightbar,
+            CustomerTopbar,
+            CustomerTwoSidebar,
+            CustomerFooter,
+            CustomerRightbar
         },
         data() {
             return {

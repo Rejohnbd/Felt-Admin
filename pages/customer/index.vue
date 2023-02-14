@@ -1,6 +1,6 @@
 <template>
     <div>
-        <PageHeader :title="title" :items="items" />
+        <CustomerPageHeader :title="title" :items="items" />
         <h1>Customer Page Welcome {{ $auth.user.email }}</h1>
     </div>
 

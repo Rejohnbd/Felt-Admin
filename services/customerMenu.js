@@ -1,4 +1,4 @@
-export const adminMenu = [
+export const customerMenu = [
   {
     id: 1,
     label: "menuitems.navigation.text",
@@ -44,7 +44,7 @@ export const adminMenu = [
   },
   {
     id: 30,
-    label: "Admin",
+    label: "Customer",
     icon: "ri-message-2-line",
     link: "/apps/chat",
   },
