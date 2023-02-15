@@ -92,15 +92,15 @@
     import EmployeeFooter from "~/components/employee/LayoutPartials/EmployeeFooter";
     import EmployeeRightbar from "~/components/employee/LayoutPartials/EmployeeRightbar";
 
-    import CustomerSidebar from "@/components/customer/LayoutPartials/CustomerSidebar";
-    import CustomerTopbar from "@/components/customer/LayoutPartials/CustomerTopbar";
-    import CustomerFooter from "@/components/customer/LayoutPartials/CustomerFooter";
-    import CustomerRightbar from "@/components/customer/LayoutPartials/CustomerRightbar";
+    import CustomerSidebar from "~/components/customer/LayoutPartials/CustomerSidebar";
+    import CustomerTopbar from "~/components/customer/LayoutPartials/CustomerTopbar";
+    import CustomerFooter from "~/components/customer/LayoutPartials/CustomerFooter";
+    import CustomerRightbar from "~/components/customer/LayoutPartials/CustomerRightbar";
 
-    import DriverSidebar from "@/components/driver/DriverSidebar";
-    import DriverTopbar from "@/components/driver/DriverTopbar";
-    import DriverFooter from "@/components/driver/DriverFooter";
-    import DriverRightbar from "@/components/driver/DriverRightbar";
+    import DriverSidebar from "~/components/driver/LayoutPartials/DriverSidebar";
+    import DriverTopbar from "~/components/driver/LayoutPartials/DriverTopbar";
+    import DriverFooter from "~/components/driver/LayoutPartials/DriverFooter";
+    import DriverRightbar from "~/components/driver/LayoutPartials/DriverRightbar";
 
     export default {
         name: 'vertical',

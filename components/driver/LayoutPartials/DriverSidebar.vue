@@ -123,7 +123,7 @@
 
 <script>
     import { mapState } from "vuex";
-    import { driverMenu } from "../../services/driverMenu";
+    import { driverMenu } from "../../../services/driverMenu";
 
     export default {
         name: 'DriverSidebar',

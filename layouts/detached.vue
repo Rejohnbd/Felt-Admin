@@ -94,10 +94,10 @@
     import CustomerFooter from "~/components/customer/LayoutPartials/CustomerFooter";
     import CustomerRightbar from "~/components/customer/LayoutPartials/CustomerRightbar";
 
-    import DriverSidebar from "@/components/driver/DriverSidebar";
-    import DriverTopbar from "@/components/driver/DriverTopbar";
-    import DriverFooter from "@/components/driver/DriverFooter";
-    import DriverRightbar from "@/components/driver/DriverRightbar";
+    import DriverSidebar from "~/components/driver/LayoutPartials/DriverSidebar";
+    import DriverTopbar from "~/components/driver/LayoutPartials/DriverTopbar";
+    import DriverFooter from "~/components/driver/LayoutPartials/DriverFooter";
+    import DriverRightbar from "~/components/driver/LayoutPartials/DriverRightbar";
 
     export default {
         name: "detached",

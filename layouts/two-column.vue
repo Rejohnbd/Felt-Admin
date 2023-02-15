@@ -70,10 +70,10 @@
     import CustomerFooter from "~/components/customer/LayoutPartials/CustomerFooter";
     import CustomerRightbar from "~/components/customer/LayoutPartials/CustomerRightbar";
 
-    import DriverTopbar from "@/components/driver/DriverTopbar";
-    import DriverTwoSidebar from "@/components/driver/DriverTwoSidebar";
-    import DriverFooter from "@/components/driver/DriverFooter";
-    import DriverRightbar from "@/components/driver/DriverRightbar";
+    import DriverTopbar from "~/components/driver/LayoutPartials/DriverTopbar";
+    import DriverTwoSidebar from "~/components/driver/LayoutPartials/DriverTwoSidebar";
+    import DriverFooter from "~/components/driver/LayoutPartials/DriverFooter";
+    import DriverRightbar from "~/components/driver/LayoutPartials/DriverRightbar";
 
     export default {
         name: "Two-column",
