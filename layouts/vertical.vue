@@ -92,10 +92,10 @@
     import EmployeeFooter from "@/components/employee/EmployeeFooter";
     import EmployeeRightbar from "@/components/employee/EmployeeRightbar";
 
-    import CustomerSidebar from "@/components/customer/CustomerSidebar";
-    import CustomerTopbar from "@/components/customer/CustomerTopbar";
-    import CustomerFooter from "@/components/customer/CustomerFooter";
-    import CustomerRightbar from "@/components/customer/CustomerRightbar";
+    import CustomerSidebar from "@/components/customer/LayoutPartials/CustomerSidebar";
+    import CustomerTopbar from "@/components/customer/LayoutPartials/CustomerTopbar";
+    import CustomerFooter from "@/components/customer/LayoutPartials/CustomerFooter";
+    import CustomerRightbar from "@/components/customer/LayoutPartials/CustomerRightbar";
 
     import DriverSidebar from "@/components/driver/DriverSidebar";
     import DriverTopbar from "@/components/driver/DriverTopbar";

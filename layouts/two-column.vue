@@ -65,10 +65,10 @@
     import EmployeeFooter from "@/components/employee/EmployeeFooter";
     import EmployeeRightbar from "@/components/employee/EmployeeRightbar";
 
-    import CustomerTopbar from "@/components/customer/CustomerTopbar";
-    import CustomerTwoSidebar from "@/components/customer/CustomerTwoSidebar";
-    import CustomerFooter from "@/components/customer/CustomerFooter";
-    import CustomerRightbar from "@/components/customer/CustomerRightbar";
+    import CustomerTopbar from "@/components/customer/LayoutPartials/CustomerTopbar";
+    import CustomerTwoSidebar from "@/components/customer/LayoutPartials/CustomerTwoSidebar";
+    import CustomerFooter from "@/components/customer/LayoutPartials/CustomerFooter";
+    import CustomerRightbar from "@/components/customer/LayoutPartials/CustomerRightbar";
 
     import DriverTopbar from "@/components/driver/DriverTopbar";
     import DriverTwoSidebar from "@/components/driver/DriverTwoSidebar";

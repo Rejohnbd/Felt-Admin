@@ -123,7 +123,7 @@
 
 <script>
     import { mapState } from "vuex";
-    import { customerMenu } from "../../services/customerMenu";
+    import { customerMenu } from "../../../services/customerMenu";
 
     export default {
         name: 'CustomerSidebar',
