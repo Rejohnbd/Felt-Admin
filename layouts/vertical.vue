@@ -81,10 +81,11 @@
 
 <script>
     import { mapState } from 'vuex';
-    import AdminSidebar from "~/components/admin/AdminSidebar";
-    import AdminTopbar from "@/components/admin/AdminTopbar";
-    import AdminFooter from "@/components/admin/AdminFooter";
-    import AdminRightbar from "@/components/admin/AdminRightbar";
+    
+    import AdminSidebar from "~/components/admin/LayoutPartials/AdminSidebar";
+    import AdminTopbar from "~/components/admin/LayoutPartials/AdminTopbar";
+    import AdminFooter from "~/components/admin/LayoutPartials/AdminFooter";
+    import AdminRightbar from "~/components/admin/LayoutPartials/AdminRightbar";
 
     import EmployeeSidebar from "@/components/employee/EmployeeSidebar";
     import EmployeeTopbar from "@/components/employee/EmployeeTopbar";

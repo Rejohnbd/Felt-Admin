@@ -123,7 +123,7 @@
 
 <script>
     import { mapState } from "vuex";
-    import { adminMenu } from "../../services/adminMenu";
+    import { adminMenu } from "../../../services/adminMenu";
 
     export default {
         name: 'AdminSidebar',

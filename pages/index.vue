@@ -11,7 +11,7 @@
 export default {
   name: 'IndexPage',
   middleware({app}){
-    console.log(app.$auth.user.user_role.slug)
+    // console.log(app.$auth.user.user_role.slug)
     if (app.$auth.user.user_role.slug == 'admin'){
       app.router.push('/admin')
     } else if (app.$auth.user.user_role.slug == 'customer') {
