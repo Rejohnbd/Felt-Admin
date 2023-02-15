@@ -87,10 +87,10 @@
     import AdminFooter from "~/components/admin/LayoutPartials/AdminFooter";
     import AdminRightbar from "~/components/admin/LayoutPartials/AdminRightbar";
 
-    import EmployeeSidebar from "@/components/employee/EmployeeSidebar";
-    import EmployeeTopbar from "@/components/employee/EmployeeTopbar";
-    import EmployeeFooter from "@/components/employee/EmployeeFooter";
-    import EmployeeRightbar from "@/components/employee/EmployeeRightbar";
+    import EmployeeSidebar from "~/components/employee/LayoutPartials/EmployeeSidebar";
+    import EmployeeTopbar from "~/components/employee/LayoutPartials/EmployeeTopbar";
+    import EmployeeFooter from "~/components/employee/LayoutPartials/EmployeeFooter";
+    import EmployeeRightbar from "~/components/employee/LayoutPartials/EmployeeRightbar";
 
     import CustomerSidebar from "@/components/customer/LayoutPartials/CustomerSidebar";
     import CustomerTopbar from "@/components/customer/LayoutPartials/CustomerTopbar";

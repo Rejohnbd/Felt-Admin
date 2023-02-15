@@ -60,15 +60,15 @@
     import AdminFooter from "~/components/admin/LayoutPartials/AdminFooter";
     import AdminRightbar from "~/components/admin/LayoutPartials/AdminRightbar";
 
-    import EmployeeTopbar from "@/components/employee/EmployeeTopbar";
-    import EmployeeTwoSidebar from "@/components/employee/EmployeeTwoSidebar";
-    import EmployeeFooter from "@/components/employee/EmployeeFooter";
-    import EmployeeRightbar from "@/components/employee/EmployeeRightbar";
+    import EmployeeTopbar from "~/components/employee/LayoutPartials/EmployeeTopbar";
+    import EmployeeTwoSidebar from "~/components/employee/LayoutPartials/EmployeeTwoSidebar";
+    import EmployeeFooter from "~/components/employee/LayoutPartials/EmployeeFooter";
+    import EmployeeRightbar from "~/components/employee/LayoutPartials/EmployeeRightbar";
 
-    import CustomerTopbar from "@/components/customer/LayoutPartials/CustomerTopbar";
-    import CustomerTwoSidebar from "@/components/customer/LayoutPartials/CustomerTwoSidebar";
-    import CustomerFooter from "@/components/customer/LayoutPartials/CustomerFooter";
-    import CustomerRightbar from "@/components/customer/LayoutPartials/CustomerRightbar";
+    import CustomerTopbar from "~/components/customer/LayoutPartials/CustomerTopbar";
+    import CustomerTwoSidebar from "~/components/customer/LayoutPartials/CustomerTwoSidebar";
+    import CustomerFooter from "~/components/customer/LayoutPartials/CustomerFooter";
+    import CustomerRightbar from "~/components/customer/LayoutPartials/CustomerRightbar";
 
     import DriverTopbar from "@/components/driver/DriverTopbar";
     import DriverTwoSidebar from "@/components/driver/DriverTwoSidebar";
