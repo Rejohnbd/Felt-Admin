@@ -155,7 +155,6 @@ export default {
                         }
                     }).then((response) => {
                         this.$toast.info(response.data.message);
-                        this.$store.dispatch('login', response.data);
                         this.$router.push({
                             path: "/",
                         });

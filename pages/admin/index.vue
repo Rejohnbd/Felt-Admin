@@ -30,5 +30,12 @@ export default {
     head: {
         titleTemplate: '%s Admin Dashboard',
     },
+    created(){
+        this.$axios.get('all-users').then((response) => {
+            console.log(response)
+        }).catch((error) => {
+            console.log(error)
+        })
+    }
 }
 </script>
