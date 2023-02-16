@@ -13,13 +13,13 @@ export default {
   middleware({app}){
     // console.log(app.$auth.user.user_role.slug)
     if (app.$auth.user.user_role.slug == 'admin'){
-      app.router.push('/admin')
+      app.router.push({ path: '/admin' })
     } else if (app.$auth.user.user_role.slug == 'customer') {
-      app.router.push('/customer')
+      app.router.push({ path: '/customer' })
     } else if (app.$auth.user.user_role.slug == 'employee') {
-      app.router.push('/employee')
+      app.router.push({ path: '/employee' })
     } else if (app.$auth.user.user_role.slug == 'driver') {
-      app.router.push('/driver')
+      app.router.push({ path: '/driver' })
     }else {
       app.router.push('/')
     }

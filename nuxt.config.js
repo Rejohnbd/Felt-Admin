@@ -4,7 +4,7 @@ export default {
   target: "server",
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: "Felt Management :: ",
+    title: "Felt Manager :: ",
     htmlAttrs: {
       lang: "en",
     },

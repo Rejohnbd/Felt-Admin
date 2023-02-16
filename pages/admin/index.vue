@@ -3,7 +3,6 @@
         <AdminPageHeader :title="title" :items="items" />
         <h1>Admin Page Welcome {{ $auth.user.email }}</h1>
     </div>
-
 </template>
 
 <script>

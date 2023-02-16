@@ -574,6 +574,7 @@
                     //     this.$store.dispatch("authfack/logout");
                     // }
                     await this.$auth.logout().then((response) =>{
+                        this.$store.dispatch('logout');
                         this.$toast.info('Logout Successfully');
                         this.$router.push({
                             path: "/auth/login",

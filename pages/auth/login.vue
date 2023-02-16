@@ -26,14 +26,13 @@
                                 Email address
                                 <span class="text-danger">*</span>
                             </label>
-
                             <input 
                                 v-model="form.email"
                                 id="emailaddress" 
                                 class="form-control" 
                                 :class="{ 'is-invalid': submitForm && $v.form.email.$error }"
                                 type="email" 
-
+                                required
                                 placeholder="Enter your email" 
                             />
                             <div v-if="submitForm && $v.form.email.$error" class="invalid-feedback">
@@ -55,7 +54,7 @@
                                     type="text" 
                                     class="form-control"
                                     :class="{ 'is-invalid': submitForm && $v.form.password.$error }"
- 
+                                    required
                                     placeholder="Enter your password" 
                                 />
                                 <input
@@ -65,7 +64,7 @@
                                     type="password" 
                                     class="form-control"
                                     :class="{ 'is-invalid': submitForm && $v.form.password.$error }"
-
+                                    required
                                     placeholder="Enter your password" 
                                 />
                                 <div class="input-group-append" data-password="false" @click="passwordShow">
@@ -91,7 +90,7 @@
             <div class="row mt-3">
                 <div class="col-12 text-center">
                     <p>
-                        <nuxt-link to="/auth/recoverpwd" class="text-muted ml-1">Forgot your password?</nuxt-link>
+                        <nuxt-link to="/auth/recoverpwd" class="text-primary font-weight-medium ml-1">Forgot your password?</nuxt-link>
                     </p>
                 </div>
             </div>
@@ -168,7 +167,6 @@ export default {
                             this.form.email = '';
                             this.form.password = '';
                         }
-                        console.log('in catch');
                         console.log(error.response);
                     });
                 } catch(error) {
