@@ -126,7 +126,7 @@
                     <template slot="button-content" class="nav-link dropdown-toggle">
                         <i class="fe-bell noti-icon"></i>
                         <span class="badge badge-danger rounded-circle noti-icon-badge">{{
-                            $t('navbar.dropdown.notification.badge')}}</span>
+                        $t('navbar.dropdown.notification.badge')}}</span>
                     </template>
 
                     <a href="#" class="dropdown-item noti-title">
@@ -214,7 +214,7 @@
                         <div class="nav-user mr-0">
                             <img src="~/assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle" />
                             <span class="pro-user-name ml-1">
-                                {{ $auth.user.name }}
+                                {{ this.$auth.user.user_details.first_name + ' ' + (this.$auth.user.user_details.last_name ? this.$auth.user.user_details.last_name : '') }}
                                 <i class="mdi mdi-chevron-down"></i>
                             </span>
                         </div>
@@ -574,7 +574,6 @@
                     //     this.$store.dispatch("authfack/logout");
                     // }
                     await this.$auth.logout().then((response) =>{
-                        this.$store.dispatch('logout');
                         this.$toast.info('Logout Successfully');
                         this.$router.push({
                             path: "/auth/login",

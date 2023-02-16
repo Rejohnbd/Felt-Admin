@@ -1,10 +1,8 @@
 <template>
-    <!-- ========== Left Sidebar Start ========== -->
     <div class="left-side-menu">
         <div class="h-100">
             <div class="sidebar-content">
                 <simplebar class="sidebar-icon-menu h-100" data-simplebar>
-                    <!-- LOGO -->
                     <a href="/" class="logo">
                         <span>
                             <img src="~/assets/images/logo-sm.png" alt height="28" />
@@ -40,7 +38,7 @@
                                 class="ri-honour-line align-middle"></i></nuxt-link>
                     </nav>
                 </simplebar>
-                <!--- Sidemenu -->
+                
                 <div class="sidebar-main-menu">
                     <simplebar id="two-col-menu" class="h-100" data-simplebar>
                         <div class="twocolumn-menu-item d-block" id="dashboard" v-if="activetab === 1">

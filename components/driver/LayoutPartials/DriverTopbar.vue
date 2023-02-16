@@ -214,7 +214,7 @@
                         <div class="nav-user mr-0">
                             <img src="~/assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle" />
                             <span class="pro-user-name ml-1">
-                                {{ $auth.user.name }}
+                                {{ this.$auth.user.user_details.first_name + ' ' + (this.$auth.user.user_details.last_name ? this.$auth.user.user_details.last_name : '') }}
                                 <i class="mdi mdi-chevron-down"></i>
                             </span>
                         </div>
