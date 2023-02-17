@@ -2,6 +2,7 @@
     <div>
         <AdminPageHeader :title="title" :items="items" />
         <h1>Admin Page Welcome {{ $auth.user.email }}</h1>
+        <button @click="faceData">Check</button>
     </div>
 </template>
 
@@ -36,6 +37,15 @@ export default {
         }).catch((error) => {
             console.log(error)
         })
+    },
+    methods: {
+        async faceData (){
+            await this.$axios.get('all-users').then((response) => {
+                console.log(response)
+            }).catch((error) => {
+                console.log(error)
+            })
+        }
     }
 }
 </script>

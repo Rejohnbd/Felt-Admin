@@ -23,6 +23,7 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     "~/plugins/simplebar.js",
+    "~/plugins/axios.js",
     "~/plugins/vue-click-outside.js",
     "~/plugins/vuelidate.js",
   ],
@@ -42,6 +43,7 @@ export default {
     "@nuxtjs/i18n",
     "vue-toastification/nuxt",
     "@nuxtjs/auth-next",
+    "@nuxtjs/dotenv",
   ],
 
   generate: { fallback: true },

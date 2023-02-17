@@ -13,7 +13,7 @@ export default {
   middleware({app}){
     // console.log(app.$auth.user.user_role.slug)
     if (app.$auth.user.user_role.slug == 'admin'){
-      app.router.push({ path: '/admin' })
+      app.router.push({ path: '/admin/dashboard/sales' })
     } else if (app.$auth.user.user_role.slug == 'customer') {
       app.router.push({ path: '/customer' })
     } else if (app.$auth.user.user_role.slug == 'employee') {

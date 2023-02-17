@@ -111,51 +111,29 @@
   },
   "menuitems": {
     "navigation": {
-      "text": "Navigation"
+      "text": "Dashboards"
     },
     "dashboard": {
       "text": "Dashboards",
-      "badge": "3",
+      "badge": "2",
       "list": {
         "sales": "Sales",
         "crm": "CRM",
         "analytics": "Analytics"
       }
     },
-    "apps": {
-      "text": "Apps"
+    "user": {
+      "text": "User"
     },
-    "chat": {
-      "text": "Chat"
-    },
-    "ecommerce": {
-      "text": "Ecommerce",
-      "badge": "New",
+    "users": {
+      "text": "Users",
       "list": {
-        "products": "Products List",
-        "productsgrid": "Products Grid"
+        "create-user": "Create User",
+        "all-users": "All Users"
       }
     },
-    "email": {
-      "text": "Email",
-      "list": {
-        "inbox": "Inbox",
-        "reademail": "Read Email",
-        "template": "Email Templates"
-      }
-    },
-    "multilevel": {
-      "text": "Multi Level",
-      "list": {
-        "level1": {
-          "1": "Level 1.1",
-          "2": "Level 1.2",
-          "level2": {
-            "1": "Level 2.1",
-            "2": "Level 2.2"
-          }
-        }
-      }
+    "device": {
+      "text": "Device"
     }
   },
   "about-us": "About Us",
