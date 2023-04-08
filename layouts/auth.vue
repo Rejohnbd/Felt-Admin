@@ -6,7 +6,7 @@
             </div>
         </div>
         <footer class="footer footer-alt">
-            2020 - {{ new Date().getFullYear() }} &copy; Developed by <a href="https://cpsdbd.com/" target="_blank">CPSD</a>
+            2020 - {{ new Date().getFullYear() }} &copy; Developed by <a href="https://aritlab.com/" target="_blank">ARITLAB</a>
         </footer>
     </div>
 </template>
