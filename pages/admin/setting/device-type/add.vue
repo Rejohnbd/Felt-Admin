@@ -115,6 +115,7 @@ export default {
                             if(response.status == 201) {
                                 this.$swal("Success!", response.data.message, "success");
                             }
+                            
                         }).catch((error) => {
                             if (error.response.status == 400) {
                                 this.$toast.error(error.response.data.message);
