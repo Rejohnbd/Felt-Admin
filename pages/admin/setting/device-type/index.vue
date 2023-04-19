@@ -33,7 +33,39 @@
                         </div>
                         <!-- Table -->
                         <div class="table-responsive mb-0">
-                            <b-table :items="tableData" :fields="fields" responsive="sm" :per-page="perPage" :current-page="currentPage" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" :filter="filter" :filter-included-fields="filterOn" @filtered="onFiltered"></b-table>
+                            <b-table 
+                                :items="tableData" 
+                                :fields="fields" 
+                                responsive="sm" 
+                                :per-page="perPage" 
+                                :current-page="currentPage" 
+                                :sort-by.sync="sortBy" 
+                                :sort-desc.sync="sortDesc" 
+                                :filter="filter" 
+                                :filter-included-fields="filterOn"
+                            >
+                                <template v-slot:cell(action)="items">
+                                    <div class="button-list">
+                                        <nuxt-link 
+                                            to="" 
+                                            v-b-tooltip.hover 
+                                            :title="`Edit Device Type ${items.item.device_type_name}`" 
+                                            class="btn btn-sm btn-purple"
+                                        >
+                                            <i class="mdi mdi-circle-edit-outline"></i>
+                                        </nuxt-link>
+                                        <button 
+                                            v-b-tooltip.hover 
+                                            :title="`Delete Device Type ${items.item.device_type_name}`" 
+                                            type="button" 
+                                            class="btn btn-sm btn-danger"
+                                            @click="deleteDeviceType(items.item.id)"
+                                        >
+                                            <i class="mdi mdi-delete"></i>
+                                        </button> 
+                                    </div>
+                                </template>
+                            </b-table>
                         </div>
                         <div class="row">
                             <div class="col">
@@ -72,166 +104,69 @@ export default {
                     active: true,
                 },
             ],
-            tableData: [
-                {
-                    name: 'Lucinda Stickley',
-                    position: 'Data Coordiator',
-                    office: 'Sirnarasa',
-                    age: 31,
-                    date: '2018/07/29',
-                    salary: '$13600'
-                }, {
-                    name: 'Henrietta Carsberg',
-                    position: 'Data Coordiator',
-                    office: 'Paninggaran',
-                    age: 59,
-                    date: '2019/07/13',
-                    salary: '$13700'
-                }, {
-                    name: 'Phylys David',
-                    position: 'Senior Developer',
-                    office: 'New Glasgow',
-                    age: 52,
-                    date: '2019/04/08',
-                    salary: '$15200'
-                }, {
-                    name: 'Brena Shivell',
-                    position: 'Graphic Designer',
-                    office: 'Caen',
-                    age: 50,
-                    date: '2018/12/14',
-                    salary: '$15800'
-                }, {
-                    name: 'Carmon Tuiller',
-                    position: 'Marketing Assistant',
-                    office: 'Jiangbei',
-                    age: 46,
-                    date: '2019/06/19',
-                    salary: '$12800'
-                }, {
-                    name: 'Tina Strattan',
-                    position: 'Account Representative III',
-                    office: 'São Miguel da Carreira',
-                    age: 31,
-                    date: '2019/07/08',
-                    salary: '$13900'
-                }, {
-                    name: 'Jon Tarbox',
-                    position: 'Senior Cost Accountant',
-                    office: 'Ryazhsk',
-                    age: 61,
-                    date: '2019/02/22',
-                    salary: '$16000'
-                }, {
-                    name: 'Carmine Hollibone',
-                    position: 'Assistant Manager',
-                    office: 'Punta del Este',
-                    age: 50,
-                    date: '2019/04/23',
-                    salary: '$15000'
-                }, {
-                    name: 'Cora Germann',
-                    position: 'Automation Specialist III',
-                    office: 'Heshui',
-                    age: 47,
-                    date: '2019/03/27',
-                    salary: '$11300'
-                }, {
-                    name: 'Dawna Hillyatt',
-                    position: 'Biostatistician I',
-                    office: 'Suresnes',
-                    age: 37,
-                    date: '2018/12/02',
-                    salary: '$14800'
-                }, {
-                    name: 'Natty Casini',
-                    position: 'Senior Developer',
-                    office: 'Pucallpa',
-                    age: 31,
-                    date: '2018/08/19',
-                    salary: '$11900'
-                }, {
-                    name: 'Vittorio Lauder',
-                    position: 'Developer II',
-                    office: 'Tønsberg',
-                    age: 54,
-                    date: '2018/12/10',
-                    salary: '$16200'
-                }, {
-                    name: 'Chery Cardenas',
-                    position: 'Senior Developer',
-                    office: 'Santo Tomas',
-                    age: 26,
-                    date: '2018/12/07',
-                    salary: '$11100'
-                }, {
-                    name: 'Hilde McFfaden',
-                    position: 'Senior Financial Analyst',
-                    office: 'Cruz',
-                    age: 43,
-                    date: '2018/11/05',
-                    salary: '$14100'
-                }, {
-                    name: 'Siward Kindred',
-                    position: 'Office Assistant III',
-                    office: 'Béziers',
-                    age: 39,
-                    date: '2018/09/26',
-                    salary: '$15500'
-                }
-        ],
-        totalRows: 1,
+            tableData: [],
+            totalRows: 1,
             currentPage: 1,
             perPage: 10,
             pageOptions: [10, 25, 50, 100],
             filter: null,
             filterOn: [],
-            sortBy: 'age',
+            sortBy: 'device_type_name',
             sortDesc: false,
-            fields: [{
-                key: 'name',
-                sortable: true
-            },
-            {
-                key: 'position',
-                sortable: true
-            },
-            {
-                key: 'office',
-                sortable: true
-            },
-            {
-                key: 'age',
-                sortable: true
-            },
-            {
-                key: 'date',
-                sortable: true
-            },
-            {
-                key: 'salary',
-                sortable: true
-            },
+            fields: [
+                {
+                    key: 'device_type_name',
+                    sortable: true
+                },
+                {
+                    key: 'device_configure_text',
+                    sortable: true
+                },
+                {
+                    key: 'action',
+                    sortable: true
+                },
             ],
         }
     },
     head: {
         titleTemplate: '%s Device List',
     },
+    computed: {
+        rows() {
+            return this.tableData.length
+        }
+    },
     created() {
         this.getAllDeviceType();
-        // this.$axios.get('all-users').then((response) => {
-        //     console.log(response)
-        // }).catch((error) => {
-        //     console.log(error)
-        // })
     },
     methods: {
         async getAllDeviceType() {
             await this.$axios.get('admin/device-types').then((response) => {
-                console.log(response)
+                this.tableData = response.data.data
             }).catch((error) => {
                 console.log(error)
+            })
+        },
+        async deleteDeviceType(deviceTypeId) {
+            console.log(deviceTypeId);
+            this.$swal({
+                title: 'Are you sure?',
+                text: 'You can\'t revert your action',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes Delete it!',
+                cancelButtonText: 'No, Keep it!',
+                showCloseButton: true,
+                showLoaderOnConfirm: true
+            }).then((result) => {
+                if (result.value) {
+                    // this.$swal('Deleted', 'You successfully deleted this file', 'success');
+                    this.$swal('Deleted', 'Delete feature under development', 'success')
+                } else {
+                    // this.$swal('Cancelled', 'Your file is still intact', 'info');
+                    this.$swal('Cancelled', 'Delete feature under development', 'info')
+                }
             })
         }
     }
