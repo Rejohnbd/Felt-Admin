@@ -115,7 +115,9 @@ export default {
                             if(response.status == 201) {
                                 this.$swal("Success!", response.data.message, "success");
                             }
-                            
+                            this.form.device_type_name = '';
+                            this.form.device_configure_text = '';
+                            this.submitForm = false;
                         }).catch((error) => {
                             if (error.response.status == 400) {
                                 this.$toast.error(error.response.data.message);
