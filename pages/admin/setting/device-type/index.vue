@@ -143,7 +143,9 @@ export default {
     methods: {
         async getAllDeviceType() {
             await this.$axios.get('admin/device-types').then((response) => {
-                this.tableData = response.data.data
+                this.$nuxt.$loading.start();
+                this.tableData = response.data.data;
+                this.$nuxt.$loading.finish();
             }).catch((error) => {
                 console.log(error)
             })
