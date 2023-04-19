@@ -44,6 +44,7 @@ export default {
     "vue-toastification/nuxt",
     "@nuxtjs/auth-next",
     "@nuxtjs/dotenv",
+    "vue-sweetalert2/nuxt",
   ],
 
   generate: { fallback: true },
@@ -75,7 +76,7 @@ export default {
     strategies: {
       laravelSanctum: {
         provider: "laravel/sanctum",
-        url: process.env.API_URL,
+        url: "http://localhost:8000",
         endpoints: {
           login: {
             url: "/login",
@@ -88,7 +89,7 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: process.env.API_URL + "/api",
+    baseURL: process.env.API_URL,
     credentials: true,
   },
 

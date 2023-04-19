@@ -134,6 +134,19 @@
     },
     "device": {
       "text": "Device"
+    },
+    "devices": {
+      "text": "Devices",
+      "list": {
+        "create-device": "Create Device",
+        "all-device": "All Device"
+      }
+    },
+    "setting": {
+      "text": "Setting",
+      "list": {
+        "device-type": "Device Type"
+      }
     }
   },
   "about-us": "About Us",

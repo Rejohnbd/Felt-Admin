@@ -54,6 +54,48 @@ export const adminMenu = [
     label: "menuitems.device.text",
     isTitle: true,
   },
+  {
+    id: 10,
+    label: "menuitems.devices.text",
+    icon: "ri-mail-line",
+    isMenuCollapsed: false,
+    subItems: [
+      {
+        id: 11,
+        label: "menuitems.devices.list.create-device",
+        link: "/",
+      },
+      {
+        id: 12,
+        label: "menuitems.devices.list.all-device",
+        link: "/admin/devices",
+      },
+    ],
+  },
+  {
+    id: 100,
+    label: "menuitems.setting.text",
+    isTitle: true,
+  },
+  {
+    id: 101,
+    label: "menuitems.setting.text",
+    icon: " ri-settings-4-line",
+    isMenuCollapsed: false,
+    subItems: [
+      {
+        id: 102,
+        label: "menuitems.setting.list.device-type",
+        link: "/admin/setting/device-type",
+      },
+    ],
+  },
+
+  // {
+  //   id: 9,
+  //   label: "menuitems.device.text",
+  //   isTitle: true,
+  // },
   // {
   //   id: 7,
   //   label: "menuitems.chat.text",
