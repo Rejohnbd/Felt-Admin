@@ -47,7 +47,7 @@
                                 <template v-slot:cell(action)="items">
                                     <div class="button-list">
                                         <nuxt-link 
-                                            to="" 
+                                            :to="`/admin/setting/device-type/${items.item.id}/edit`" 
                                             v-b-tooltip.hover 
                                             :title="`Edit Device Type ${items.item.device_type_name}`" 
                                             class="btn btn-sm btn-purple"
@@ -143,7 +143,9 @@ export default {
     methods: {
         async getAllDeviceType() {
             await this.$axios.get('admin/device-types').then((response) => {
-                this.tableData = response.data.data
+                this.$nuxt.$loading.start();
+                this.tableData = response.data.data;
+                this.$nuxt.$loading.finish();
             }).catch((error) => {
                 console.log(error)
             })
