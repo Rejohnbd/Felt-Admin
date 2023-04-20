@@ -79,7 +79,11 @@ export default {
                     href: '#'
                 },
                 {
-                    text: 'Device Add',
+                    text: 'Device Types',
+                    href: '#'
+                },
+                {
+                    text: 'Device Type Add',
                     active: true,
                 },
             ],
