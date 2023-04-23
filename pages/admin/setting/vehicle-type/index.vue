@@ -55,7 +55,7 @@
                                 <template v-slot:cell(action)="items">
                                     <div class="button-list">
                                         <nuxt-link 
-                                            :to="`/admin/setting/device-type/${items.item.id}/edit`" 
+                                            :to="`/admin/setting/vehicle-type/${items.item.id}/edit`" 
                                             v-b-tooltip.hover 
                                             :title="`Edit Device Type ${items.item.device_type_name}`" 
                                             class="btn btn-sm btn-purple"
