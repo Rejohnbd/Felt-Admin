@@ -145,7 +145,8 @@
     "setting": {
       "text": "Setting",
       "list": {
-        "device-type": "Device Type"
+        "device-type": "Device Type",
+        "vehicle-type": "Vehicle Type"
       }
     }
   },

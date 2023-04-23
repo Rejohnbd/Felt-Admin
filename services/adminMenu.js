@@ -88,6 +88,11 @@ export const adminMenu = [
         label: "menuitems.setting.list.device-type",
         link: "/admin/setting/device-type",
       },
+      {
+        id: 103,
+        label: "menuitems.setting.list.vehicle-type",
+        link: "/admin/setting/vehicle-type",
+      },
     ],
   },
 

@@ -132,8 +132,22 @@
       }
     },
     "device": {
-      "text": "যন্ত্র"
-    }
+      "text": "ডিভাইস"
+    },
+    "devices": {
+      "text": "ডিভাইস",
+      "list": {
+        "create-device": "ডিভাইস তৈরি করুন",
+        "all-device": "সমস্ত ডিভাইস"
+      }
+    },
+    "setting": {
+      "text": "সেটিংস",
+      "list": {
+        "device-type": "ডিভাইসের ধরন",
+        "vehicle-type": "গাড়ির ধরন"
+      }
+    }  
   },
    "about-us": "আমাদের সম্পর্কে",
    "help": "সাহায্য",

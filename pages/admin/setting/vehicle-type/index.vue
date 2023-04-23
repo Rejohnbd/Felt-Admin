@@ -3,7 +3,7 @@
         <AdminPageHeader :title="title" :items="items" />
         <div class="row mb-2">
             <div class="col-12">
-                <nuxt-link to="/admin/setting/device-type/add" class="btn btn-primary waves-effect waves-light float-right"><i class="fe-plus mr-1"></i>Add New</nuxt-link>
+                <nuxt-link to="/admin/setting/vehicle-type/add" class="btn btn-primary waves-effect waves-light float-right"><i class="fe-plus mr-1"></i>Add New</nuxt-link>
             </div>
         </div>
         <div class="row">
@@ -44,6 +44,14 @@
                                 :filter="filter" 
                                 :filter-included-fields="filterOn"
                             >
+                                <template v-slot:cell(vehicle_type_image)="items">
+                                    <span class="b-avatar badge-secondary rounded">
+                                        <span class="b-avatar-img">
+                                            <img :src="$config.BaseUrl + items.item.vehicle_type_image" :alt="items.item.vehicle_type_name" />
+                                        </span>
+                                    </span>
+                                </template>
+
                                 <template v-slot:cell(action)="items">
                                     <div class="button-list">
                                         <nuxt-link 
@@ -59,7 +67,7 @@
                                             :title="`Delete Device Type ${items.item.device_type_name}`" 
                                             type="button" 
                                             class="btn btn-sm btn-danger"
-                                            @click="deleteDeviceType(items.item.id)"
+                                            @click="deleteHandler(items.item.id)"
                                         >
                                             <i class="mdi mdi-delete"></i>
                                         </button> 
@@ -86,11 +94,11 @@
 
 <script>
 export default {
-    name: 'DeviceTypeListPage',
+    name: 'VehicleTypeListPage',
     middleware: ['auth', 'auth-admin'],
     data() {
         return {
-            title: 'Device Type List',
+            title: 'Vehicle Type List',
             items: [{
                     text: 'Dashobard',
                     href: '#',
@@ -100,7 +108,7 @@ export default {
                     href: '#'
                 },
                 {
-                    text: 'Device Type List',
+                    text: 'Vehicle Type List',
                     active: true,
                 },
             ],
@@ -111,15 +119,15 @@ export default {
             pageOptions: [10, 25, 50, 100],
             filter: null,
             filterOn: [],
-            sortBy: 'device_type_name',
+            sortBy: 'vehicle_type_name',
             sortDesc: false,
             fields: [
                 {
-                    key: 'device_type_name',
+                    key: 'vehicle_type_image',
                     sortable: true
                 },
                 {
-                    key: 'device_configure_text',
+                    key: 'vehicle_type_name',
                     sortable: true
                 },
                 {
@@ -130,7 +138,7 @@ export default {
         }
     },
     head: {
-        titleTemplate: '%s Device Type List',
+        titleTemplate: '%s Vehicle Type List',
     },
     computed: {
         rows() {
@@ -142,7 +150,7 @@ export default {
     },
     methods: {
         async getAllDeviceType() {
-            await this.$axios.get('admin/device-types').then((response) => {
+            await this.$axios.get('admin/vehicle-types').then((response) => {
                 this.$nuxt.$loading.start();
                 this.tableData = response.data.data;
                 this.$nuxt.$loading.finish();
@@ -150,8 +158,8 @@ export default {
                 console.log(error)
             })
         },
-        async deleteDeviceType(deviceTypeId) {
-            console.log(deviceTypeId);
+        async deleteHandler(deleteId) {
+            console.log(deleteId);
             this.$swal({
                 title: 'Are you sure?',
                 text: 'You can\'t revert your action',
