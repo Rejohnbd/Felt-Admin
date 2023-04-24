@@ -93,6 +93,11 @@ export const adminMenu = [
         label: "menuitems.setting.list.vehicle-type",
         link: "/admin/setting/vehicle-type",
       },
+      {
+        id: 104,
+        label: "menuitems.setting.list.packages",
+        link: "/admin/setting/packages",
+      },
     ],
   },
 

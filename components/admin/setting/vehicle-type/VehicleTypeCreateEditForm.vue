@@ -106,10 +106,8 @@ export default {
             try {
                 await this.$axios.get("admin/vehicle-types/" + this.$route.params.id)
                     .then((response) => {
-                        console.log(response);
                         if (response.status == 200) {
                             this.formModel = Object.assign({}, response.data.data);
-                            // console.log(this.$config.BaseUrl + response.data.data.vehicle_type_image)
                             this.editImage = response.data.data.vehicle_type_image;
                             this.editImagePreview = true;
                         }
@@ -136,7 +134,6 @@ export default {
                         let formData = new FormData();
                         formData.append('vehicle_type_name', this.formModel.vehicle_type_name);
                         formData.append('vehicle_type_image', this.image);
-
                         this.$emit("form-submitted", formData);
                     } else {
                         this.$toast.error('Vehicle Type Image is Required');

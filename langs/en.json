@@ -146,7 +146,8 @@
       "text": "Setting",
       "list": {
         "device-type": "Device Type",
-        "vehicle-type": "Vehicle Type"
+        "vehicle-type": "Vehicle Type",
+        "packages": "Packages"
       }
     }
   },
