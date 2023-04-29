@@ -7,7 +7,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12">
+            <div class="col-12" v-if="loading">
+                <Loading />
+            </div>
+            <div class="col-12" v-else>
                 <div class="card">
                     <div class="card-body">
                         <p class="text-muted font-13 mb-4"></p>
@@ -93,25 +96,29 @@
 </template>
 
 <script>
+import Loading from '@/components/common/Loading.vue';
+
 export default {
-    name: 'VehicleTypeListPage',
-    middleware: ['auth', 'auth-admin'],
+    name: "VehicleTypeListPage",
+    middleware: ["auth", "auth-admin"],
+    components: {
+        Loading
+    },
     data() {
         return {
-            title: 'Vehicle Type List',
+            title: "Vehicle Type List",
             items: [{
-                    text: 'Dashobard',
-                    href: '#',
-                },
-                {
-                    text: 'Setting',
-                    href: '#'
-                },
-                {
-                    text: 'Vehicle Type List',
+                    text: "Dashobard",
+                    href: "#",
+                }, {
+                    text: "Setting",
+                    href: "#"
+                }, {
+                    text: "Vehicle Type List",
                     active: true,
                 },
             ],
+            loading: false,
             tableData: [],
             totalRows: 1,
             currentPage: 1,
@@ -119,30 +126,30 @@ export default {
             pageOptions: [10, 25, 50, 100],
             filter: null,
             filterOn: [],
-            sortBy: 'vehicle_type_name',
+            sortBy: "vehicle_type_name",
             sortDesc: false,
             fields: [
                 {
-                    key: 'vehicle_type_image',
+                    key: "vehicle_type_image",
                     sortable: true
                 },
                 {
-                    key: 'vehicle_type_name',
+                    key: "vehicle_type_name",
                     sortable: true
                 },
                 {
-                    key: 'action',
+                    key: "action",
                     sortable: true
                 },
             ],
-        }
+        };
     },
     head: {
-        titleTemplate: '%s Vehicle Type List',
+        titleTemplate: "%s Vehicle Type List",
     },
     computed: {
         rows() {
-            return this.tableData.length
+            return this.tableData.length;
         }
     },
     created() {
@@ -150,35 +157,37 @@ export default {
     },
     methods: {
         async getAllDeviceType() {
-            await this.$axios.get('admin/vehicle-types').then((response) => {
-                this.$nuxt.$loading.start();
+            await this.$axios.get("admin/vehicle-types").then((response) => {
+                this.loading = true;
                 this.tableData = response.data.data;
-                this.$nuxt.$loading.finish();
+                this.loading = false;
             }).catch((error) => {
-                console.log(error)
-            })
+                console.log(error);
+            });
         },
         async deleteHandler(deleteId) {
             console.log(deleteId);
             this.$swal({
-                title: 'Are you sure?',
-                text: 'You can\'t revert your action',
-                type: 'warning',
+                title: "Are you sure?",
+                text: "You can't revert your action",
+                type: "warning",
                 showCancelButton: true,
-                confirmButtonText: 'Yes Delete it!',
-                cancelButtonText: 'No, Keep it!',
+                confirmButtonText: "Yes Delete it!",
+                cancelButtonText: "No, Keep it!",
                 showCloseButton: true,
                 showLoaderOnConfirm: true
             }).then((result) => {
                 if (result.value) {
                     // this.$swal('Deleted', 'You successfully deleted this file', 'success');
-                    this.$swal('Deleted', 'Delete feature under development', 'success')
-                } else {
-                    // this.$swal('Cancelled', 'Your file is still intact', 'info');
-                    this.$swal('Cancelled', 'Delete feature under development', 'info')
+                    this.$swal("Deleted", "Delete feature under development", "success");
                 }
-            })
+                else {
+                    // this.$swal('Cancelled', 'Your file is still intact', 'info');
+                    this.$swal("Cancelled", "Delete feature under development", "info");
+                }
+            });
         }
-    }
+    },
+    components: { Loading }
 }
 </script>

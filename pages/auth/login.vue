@@ -146,7 +146,6 @@ export default {
             this.submitForm = true;
             this.$v.$touch();
             if (!this.$v.$invalid) {
-                this.$nuxt.$loading.start();
                 try{
                     await this.$auth.loginWith('laravelSanctum',{
                         data: {
@@ -175,7 +174,6 @@ export default {
                     this.$toast.error("Connection Error");
                     console.log('Connection Error:', error);
                 }
-                this.$nuxt.$loading.finish();
             } else {
                 return;
             }

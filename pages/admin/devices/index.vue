@@ -6,9 +6,11 @@
                 <nuxt-link to="/admin/devices/add" class="btn btn-primary waves-effect waves-light float-right"><i class="fe-plus mr-1"></i>Add New</nuxt-link>
             </div>
         </div>
-        <Loading />
         <div class="row">
-            <div class="col-12">
+            <div class="col-12" v-if="loading">
+                <Loading />
+            </div>
+            <div class="col-12" v-else>
                 <div class="card">
                     <div class="card-body">
                         <p class="text-muted font-13 mb-4"></p>
@@ -115,6 +117,7 @@ export default {
                     active: true,
                 },
             ],
+            loading: false,
             tableData: [],
             totalRows: 1,
             currentPage: 1,
@@ -183,9 +186,9 @@ export default {
         async getAllDevices() {
             await this.$axios.get('admin/devices')
                 .then((response) => {
-                    this.$nuxt.$loading.start();
+                    this.loading = true;
                     this.tableData = response.data.data
-                    this.$nuxt.$loading.finish();
+                    this.loading = false;
                 }).catch((error) => {
                     console.log(error)
                 });

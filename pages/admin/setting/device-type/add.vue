@@ -60,7 +60,6 @@ export default {
     },
     methods: {
         async create(data) {
-            this.$nuxt.$loading.start();
             try {
                 await this.$axios.post('admin/device-types', data)
                     .then((response) => {
@@ -80,7 +79,6 @@ export default {
                 this.$toast.error("Connection Error");
                 console.log('Connection Error:', error);
             }
-            this.$nuxt.$loading.finish();
         }
     }
 }

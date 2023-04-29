@@ -7,7 +7,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12">
+            <div class="col-12" v-if="loading">
+                <Loading />
+            </div>
+            <div class="col-12" v-else>
                 <div class="card">
                     <div class="card-body">
                         <p class="text-muted font-13 mb-4"></p>
@@ -89,9 +92,14 @@
 </template>
 
 <script>
+import Loading from '@/components/common/Loading.vue';
+
 export default {
     name: 'DeviceTypeListPage',
     middleware: ['auth', 'auth-admin'],
+    components: {
+        Loading
+    },
     data() {
         return {
             title: 'Device Type List',
@@ -108,6 +116,7 @@ export default {
                     active: true,
                 },
             ],
+            loading: false,
             tableData: [],
             totalRows: 1,
             currentPage: 1,
@@ -151,9 +160,9 @@ export default {
     methods: {
         async getAllDeviceType() {
             await this.$axios.get('admin/device-types').then((response) => {
-                this.$nuxt.$loading.start();
+                this.loading = true;
                 this.tableData = response.data.data;
-                this.$nuxt.$loading.finish();
+                this.loading = false;
             }).catch((error) => {
                 console.log(error)
             })

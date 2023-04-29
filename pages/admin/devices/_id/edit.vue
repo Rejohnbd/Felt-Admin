@@ -69,8 +69,7 @@ export default {
                 device_sim: data.device_sim,
                 device_sim_type: data.device_sim_type,
                 device_health_status: data.device_health_status
-            }
-            this.$nuxt.$loading.start();
+            }            
             try {
                 await this.$axios.put(`admin/devices/${data.id}`, postData)
                     .then((response) => {
@@ -94,7 +93,6 @@ export default {
                 this.$toast.error("Connection Error");
                 console.log('Connection Error:', error);
             }
-            this.$nuxt.$loading.finish();
         }
     }
 }

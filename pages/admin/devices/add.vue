@@ -68,11 +68,9 @@ export default {
                 device_sim_type: data.device_sim_type,
                 device_health_status: data.device_health_status
             }
-            this.$nuxt.$loading.start();
             try {
                 await this.$axios.post('admin/devices', postData)
                     .then((response) => {
-                        console.log(response)
                         if(response.status == 201) {
                             this.$swal("Success!", response.data.message, "success");
                             this.$router.push({
@@ -89,7 +87,6 @@ export default {
                 this.$toast.error("Connection Error");
                 console.log('Connection Error:', error);
             }
-            this.$nuxt.$loading.finish();
         }
     }
 }

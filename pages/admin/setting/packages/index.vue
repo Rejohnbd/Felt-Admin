@@ -6,10 +6,12 @@
                 <nuxt-link to="/admin/setting/packages/add" class="btn btn-primary waves-effect waves-light float-right"><i class="fe-plus mr-1"></i>Add New</nuxt-link>
             </div>
         </div>
-        <Loading />
         
         <div class="row my-3">
-            <div class="col-xl-3 col-md-6" v-for="(servicePackage, index) in servicePackages" :key="index">
+            <div class="col-12" v-if="loading">
+                <Loading />
+            </div>
+            <div class="col-xl-3 col-md-6" v-for="(servicePackage, index) in servicePackages" :key="index" v-else>
                 <div class="card card-pricing">
                     <div class="card-body text-center">
                         <b-dropdown class="float-right" toggle-class="card-drop p-0" variant="black" right>
@@ -82,6 +84,7 @@ export default {
                     active: true,
                 },
             ],
+            loading: false,
             servicePackages: []
         }
     },
@@ -94,9 +97,9 @@ export default {
     methods: {
         async getAllDeviceType() {
             await this.$axios.get('admin/service-packages').then((response) => {
-                this.$nuxt.$loading.start();
+                this.loading = true;
                 this.servicePackages = response.data.data;
-                this.$nuxt.$loading.finish();
+                this.loading = false;
             }).catch((error) => {
                 console.log(error)
             })

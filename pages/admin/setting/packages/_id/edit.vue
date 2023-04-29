@@ -65,7 +65,6 @@ export default {
             this.$refs.editPackageForm.getPakcageById();
         },
         async update(data) {
-            this.$nuxt.$loading.start();
             try {
                 await this.$axios.put(`admin/service-packages/${data.id}`, data)
                     .then((response) => {
@@ -87,7 +86,6 @@ export default {
                 this.$toast.error("Connection Error");
                 console.log('Connection Error:', error);
             }
-            this.$nuxt.$loading.finish();
         }
     }
 }

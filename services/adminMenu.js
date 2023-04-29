@@ -38,14 +38,9 @@ export const adminMenu = [
     isMenuCollapsed: false,
     subItems: [
       {
-        id: 7,
-        label: "menuitems.users.list.create-user",
-        link: "/email/inbox",
-      },
-      {
         id: 8,
         label: "menuitems.users.list.all-users",
-        link: "/email/reademail/1",
+        link: "/admin/users",
       },
     ],
   },
