@@ -61,11 +61,6 @@ export const adminMenu = [
     isMenuCollapsed: false,
     subItems: [
       {
-        id: 11,
-        label: "menuitems.devices.list.create-device",
-        link: "/",
-      },
-      {
         id: 12,
         label: "menuitems.devices.list.all-device",
         link: "/admin/devices",

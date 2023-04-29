@@ -44,6 +44,10 @@
                                 :filter="filter" 
                                 :filter-included-fields="filterOn"
                             >
+                                <template v-slot:cell(number_of_device)="items">
+                                    {{ items.item.devices.length }}
+                                </template>
+
                                 <template v-slot:cell(action)="items">
                                     <div class="button-list">
                                         <nuxt-link 
@@ -117,6 +121,10 @@ export default {
                 {
                     key: 'device_type_name',
                     sortable: true
+                },
+                {
+                    label: 'Number of Device',
+                    key: 'number_of_device'
                 },
                 {
                     key: 'device_configure_text',
