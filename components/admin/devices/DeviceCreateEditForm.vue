@@ -1,6 +1,5 @@
 <template>
     <div>
-        <Loading />
         <form @submit.prevent="formSubmitHandler">
             <div class="form-group">
                 <label for="deviceTypeName">

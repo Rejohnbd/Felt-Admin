@@ -81,7 +81,10 @@
                         </div>
 
                         <div class="form-group mb-0 text-center">
-                            <button class="btn btn-primary btn-block" type="submit">Log In</button>
+                            <button class="btn btn-primary btn-block" type="submit" :disabled="submitForm">
+                                <b-spinner class="mr-2" small v-if="submitForm"></b-spinner>
+                                Log In
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -167,6 +170,7 @@ export default {
                         }
                         console.log(error.response);
                     });
+                    this.submitForm = false;
                 } catch(error) {
                     this.form.email = '';
                     this.form.password = '';
