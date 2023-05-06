@@ -1,5 +1,4 @@
 export default {
-  // loading: "~/components/Loading.vue",
   ssr: false,
   target: "server",
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -28,6 +27,11 @@ export default {
     "~/plugins/vuelidate.js",
   ],
 
+  // ENV variables: https://nuxtjs.org/tutorials/moving-from-nuxtjs-dotenv-to-runtime-config/
+  publicRuntimeConfig: {
+    BaseUrl: process.env.BASE_URL,
+  },
+
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
@@ -45,6 +49,7 @@ export default {
     "@nuxtjs/auth-next",
     "@nuxtjs/dotenv",
     "vue-sweetalert2/nuxt",
+    // "@nuxtjs/dotenv",
   ],
 
   generate: { fallback: true },
@@ -76,7 +81,7 @@ export default {
     strategies: {
       laravelSanctum: {
         provider: "laravel/sanctum",
-        url: "http://localhost:8000",
+        url: process.env.BASE_URL,
         endpoints: {
           login: {
             url: "/login",

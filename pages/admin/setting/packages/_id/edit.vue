@@ -5,13 +5,15 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">Add Device Type</h4>
+                        <h4 class="header-title">Edit Package</h4>
                         <div class="row">
                             <div class="col-12">
                                 <div class="p-2">
-                                    <DeviceTypeCreateEditForm
-                                        v-on:form-submitted="create"
-                                        operation="create"
+                                    <PackageCreateEditForm
+                                        v-on:mounted="initEdit"
+                                        ref="editPackageForm"
+                                        v-on:form-submitted="update" 
+                                        operation="edit" 
                                     />
                                 </div>
                             </div>
@@ -24,17 +26,17 @@
 </template>
 
 <script>
-import DeviceTypeCreateEditForm from '@/components/admin/setting/device-type/DeviceTypeCreateEditForm.vue';
+import PackageCreateEditForm from '@/components/admin/setting/packages/PackageCreateEditForm.vue';
 
 export default {
-    name: 'AddDeviceTypePage',
+    name: 'AddPackagePage',
     middleware: ['auth', 'auth-admin'],
     components: {
-        DeviceTypeCreateEditForm
+        PackageCreateEditForm
     },
     data() {
         return {
-            title: 'Device Type Add',
+            title: 'Package Edit',
             items: [
                 {
                     text: 'Dashobard',
@@ -45,34 +47,39 @@ export default {
                     href: '#'
                 },
                 {
-                    text: 'Device Types',
+                    text: 'Packages',
                     href: '#'
                 },
                 {
-                    text: 'Device Type Add',
+                    text: 'Package Edit',
                     active: true,
                 },
             ],
         }
     },
     head: {
-        titleTemplate: '%s Device Type Add',
+        titleTemplate: '%s Package Edit',
     },
     methods: {
-        async create(data) {
+        initEdit() {
+            this.$refs.editPackageForm.getPakcageById();
+        },
+        async update(data) {
             try {
-                await this.$axios.post('admin/device-types', data)
+                await this.$axios.put(`admin/service-packages/${data.id}`, data)
                     .then((response) => {
-                        if(response.status == 201) {
+                        if (response.status == 201) {
                             this.$swal("Success!", response.data.message, "success");
                             this.$router.push({
-                                path: "/admin/setting/device-type",
+                                path: "/admin/setting/packages",
                             });
                         }
                     }).catch((error) => {
                         if (error.response.status == 400) {
                             this.$toast.error(error.response.data.message);
-                        } 
+                        } else {
+                            this.$toast.error("Some thing Happend Wrong. Try Again");
+                        }
                         console.log(error.response.data);
                     });
             } catch (error) {

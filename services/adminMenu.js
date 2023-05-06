@@ -38,14 +38,9 @@ export const adminMenu = [
     isMenuCollapsed: false,
     subItems: [
       {
-        id: 7,
-        label: "menuitems.users.list.create-user",
-        link: "/email/inbox",
-      },
-      {
         id: 8,
         label: "menuitems.users.list.all-users",
-        link: "/email/reademail/1",
+        link: "/admin/users",
       },
     ],
   },
@@ -60,11 +55,6 @@ export const adminMenu = [
     icon: "ri-mail-line",
     isMenuCollapsed: false,
     subItems: [
-      {
-        id: 11,
-        label: "menuitems.devices.list.create-device",
-        link: "/",
-      },
       {
         id: 12,
         label: "menuitems.devices.list.all-device",
@@ -87,6 +77,16 @@ export const adminMenu = [
         id: 102,
         label: "menuitems.setting.list.device-type",
         link: "/admin/setting/device-type",
+      },
+      {
+        id: 103,
+        label: "menuitems.setting.list.vehicle-type",
+        link: "/admin/setting/vehicle-type",
+      },
+      {
+        id: 104,
+        label: "menuitems.setting.list.packages",
+        link: "/admin/setting/packages",
       },
     ],
   },
