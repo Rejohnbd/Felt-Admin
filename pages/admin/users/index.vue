@@ -66,6 +66,7 @@
                                 <template v-slot:cell(action)="items">
                                     <div class="button-list">
                                         <nuxt-link 
+                                            v-if="items.item.id != 1"
                                             :to="`/admin/users/${items.item.id}/edit`" 
                                             v-b-tooltip.hover 
                                             :title="`Edit User ${items.item.user_details.first_name} ${items.item.user_details.last_name ? items.item.user_details.last_name : ''}`" 
@@ -74,6 +75,7 @@
                                             <i class="mdi mdi-circle-edit-outline"></i>
                                         </nuxt-link>
                                         <button 
+                                            v-if="items.item.id != 1"
                                             v-b-tooltip.hover 
                                             :title="`Delete User ${items.item.user_details.first_name} ${items.item.user_details.last_name ? items.item.user_details.last_name : ''}`" 
                                             type="button" 
@@ -192,8 +194,7 @@ export default {
             await this.$axios.get('admin/users')
                 .then((response) => {
                     this.loading = true;
-                    this.tableData = response.data.data
-                    console.log(this.tableData)
+                    this.tableData = response.data.data;
                     this.loading = false;
                 }).catch((error) => {
                     console.log(error)

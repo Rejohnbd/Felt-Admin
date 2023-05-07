@@ -63,7 +63,7 @@
                         id="userPhone"
                         :class="{ 'is-invalid': submitForm && $v.formModel.phone_number.$error }"
                         type="number"
-                        required 
+                        required
                         placeholder="Enter User Phone" 
                     />
                     <div v-if="submitForm && $v.formModel.phone_number.$error" class="invalid-feedback">
@@ -75,7 +75,7 @@
                 </div>
                 <div class="col-md-4">
                     <label for="userPassword">
-                        User Password<span class="text-danger">*</span>
+                        User Password<span class="text-danger" v-if="operation != 'edit'">*</span>
                     </label>
                     <div class="input-group input-group-merge">
                         <input 
@@ -84,7 +84,7 @@
                             id="userPassword"
                             :class="{ 'is-invalid': submitForm && $v.formModel.password.$error }"
                             :type="`${showPassword ? 'text' : 'password'}`" 
-                            required 
+                            :required="operation != 'edit' ? true : false"
                             placeholder="Enter User Password" 
                         />
                         <div class="input-group-append" data-password="false" @click="passwordShow">
@@ -329,12 +329,18 @@
 </template>
 
 <script>
-import { required, email, numeric, minLength, maxLength } from 'vuelidate/lib/validators';
+import { 
+    required, 
+    email, 
+    numeric, 
+    minLength, 
+    maxLength
+} from 'vuelidate/lib/validators';
 import Multiselect from 'vue-multiselect';
 import Loading from '@/components/common/Loading.vue';
 
 export default {
-    name: 'UserCreateEditForm',
+    name: 'UserCreateForm',
     middleware: ['auth', 'auth-admin'],
     props: {
         operation: String,
@@ -371,6 +377,7 @@ export default {
                 notes: '',
                 user_status: ''
             },
+            passwordRequired: true,
             submitForm: false,
         }
     },
@@ -386,7 +393,8 @@ export default {
                 required, numeric, minLength: minLength(11), maxLength: maxLength(11)
             },
             password: {
-                required, minLength: minLength(8)
+                required, 
+                minLength: minLength(8)
             },
             user_role: {
                 required
@@ -436,7 +444,6 @@ export default {
         },
         userRoleHandler(){
             this.selectedUserType = this.formModel.user_role.slug;
-            // console.log(this.$v)
         },
         nameWithPhoneEmail({email, user_details}) {
             return `${user_details.first_name} ${user_details.last_name != null ? user_details.last_name : ''} - ${email} - ${user_details.phone_number}`;
