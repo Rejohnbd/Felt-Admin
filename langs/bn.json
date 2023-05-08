@@ -127,7 +127,6 @@
     "users": {
       "text": "ব্যবহারকারী গন",
       "list": {
-        "create-user": "ব্যবহারকারী তৈরি করুন",
         "all-users": "সকল ব্যবহারকারী"
       }
     },
@@ -137,8 +136,16 @@
     "devices": {
       "text": "ডিভাইস",
       "list": {
-        "create-device": "ডিভাইস তৈরি করুন",
         "all-device": "সমস্ত ডিভাইস"
+      }
+    },
+    "vehicle": {
+      "text": "যানবাহন"
+    },
+    "vehicles": {
+      "text": "যানবাহন",
+      "list": {
+        "all-vehicle": "সমস্ত যানবাহন"
       }
     },
     "setting": {

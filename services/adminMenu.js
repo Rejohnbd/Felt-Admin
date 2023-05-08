@@ -34,7 +34,7 @@ export const adminMenu = [
   {
     id: 6,
     label: "menuitems.users.text",
-    icon: "ri-mail-line",
+    icon: " ri-group-fill",
     isMenuCollapsed: false,
     subItems: [
       {
@@ -52,13 +52,31 @@ export const adminMenu = [
   {
     id: 10,
     label: "menuitems.devices.text",
-    icon: "ri-mail-line",
+    icon: "ri-cast-fill",
     isMenuCollapsed: false,
     subItems: [
       {
-        id: 12,
+        id: 11,
         label: "menuitems.devices.list.all-device",
         link: "/admin/devices",
+      },
+    ],
+  },
+  {
+    id: 12,
+    label: "menuitems.vehicle.text",
+    isTitle: true,
+  },
+  {
+    id: 13,
+    label: "menuitems.vehicles.text",
+    icon: "ri-car-fill",
+    isMenuCollapsed: false,
+    subItems: [
+      {
+        id: 14,
+        label: "menuitems.vehicles.list.all-vehicle",
+        link: "/admin/vehicles",
       },
     ],
   },

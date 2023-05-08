@@ -404,6 +404,7 @@ export default {
             await this.$axios.get('admin/users/'+ this.$route.params.id)
                 .then((response) => {
                     if (response.status == 200) {
+                        console.log(response.data.data)
                         this.selectedUserType = response.data.data.user_role.slug;
                         this.formModel = Object.assign({}, response.data.data, response.data.data.user_details, );
                         this.passwordRequired = false;

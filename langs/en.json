@@ -128,7 +128,6 @@
     "users": {
       "text": "Users",
       "list": {
-        "create-user": "Create User",
         "all-users": "All Users"
       }
     },
@@ -138,8 +137,16 @@
     "devices": {
       "text": "Devices",
       "list": {
-        "create-device": "Create Device",
         "all-device": "All Device"
+      }
+    },
+    "vehicle": {
+      "text": "Vehicle"
+    },
+    "vehicles": {
+      "text": "Vehicle",
+      "list": {
+        "all-vehicle": "All Vehicle"
       }
     },
     "setting": {
