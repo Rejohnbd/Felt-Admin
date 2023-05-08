@@ -101,6 +101,7 @@
         "list": {
           "greet": "স্বাগত!",
           "account": "আমার অ্যাকাউন্ট",
+          "profile": "আমার প্রোফাইল",
           "mywallet": "আমার মানিব্যাগ",
           "settings": "সেটিংস",
           "lockscreen": "বন্ধ পর্দা",
@@ -153,7 +154,8 @@
       "list": {
         "device-type": "ডিভাইসের ধরন",
         "vehicle-type": "গাড়ির ধরন",
-        "packages": "প্যাকেজ"
+        "packages": "প্যাকেজ",
+        "profile": "প্রোফাইল"
       }
     }  
   },

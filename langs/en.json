@@ -101,6 +101,7 @@
         "list": {
           "greet": "Welcome !",
           "account": "My Account",
+          "profile": "My Profile",
           "mywallet": "My Wallet",
           "settings": "Settings",
           "lockscreen": "Lock screen",
@@ -154,7 +155,8 @@
       "list": {
         "device-type": "Device Type",
         "vehicle-type": "Vehicle Type",
-        "packages": "Packages"
+        "packages": "Packages",
+        "profile": "Profile"
       }
     }
   },

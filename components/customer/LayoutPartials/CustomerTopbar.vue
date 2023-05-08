@@ -224,28 +224,28 @@
                         <h6 class="text-overflow m-0 py-2">{{ $t('navbar.dropdown.name.list.greet') }}</h6>
                     </b-dropdown-header>
 
-                    <b-dropdown-item href="#">
+                    <b-dropdown-item to="/customer/setting/profile">
                         <i class="remixicon-account-circle-line"></i>
-                        <span>{{ $t('navbar.dropdown.name.list.account') }}</span>
+                        <span>{{ $t('navbar.dropdown.name.list.profile') }}</span>
                     </b-dropdown-item>
 
-                    <b-dropdown-item href="#">
+                    <!-- <b-dropdown-item href="#">
                         <i class="remixicon-settings-3-line"></i>
                         <span>{{ $t('navbar.dropdown.name.list.settings') }}</span>
-                    </b-dropdown-item>
+                    </b-dropdown-item> -->
 
-                    <b-dropdown-item href="#">
+                    <!-- <b-dropdown-item href="#">
                         <i class="remixicon-wallet-line"></i>
                         <span>
                             {{ $t('navbar.dropdown.name.list.mywallet') }}
                             <span class="badge badge-success float-right">3</span>
                         </span>
-                    </b-dropdown-item>
+                    </b-dropdown-item> -->
 
-                    <b-dropdown-item href="#">
+                    <!-- <b-dropdown-item href="#">
                         <i class="remixicon-lock-line"></i>
                         <span>{{ $t('navbar.dropdown.name.list.lockscreen') }}</span>
-                    </b-dropdown-item>
+                    </b-dropdown-item> -->
 
                     <b-dropdown-divider></b-dropdown-divider>
                     <a class="dropdown-item" @click="logoutUser" href="javascript:void(0);">
