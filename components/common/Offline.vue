@@ -85,10 +85,8 @@
 <script>
 export default {
     layout: "OfflinePage",
-    head() {
-        return {
-            title: `Logout 2 | Minton - Nuxtjs Responsive Admin Dashboard Template`,
-        };
+    head: {
+         titleTemplate: '%s Offline',
     },
     data() {
         return {};

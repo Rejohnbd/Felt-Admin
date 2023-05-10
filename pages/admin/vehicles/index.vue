@@ -3,7 +3,7 @@
         <AdminPageHeader :title="title" :items="items" />
         <div class="row mb-2">
             <div class="col-12">
-                <nuxt-link to="/admin/setting/vehicle-type/add" class="btn btn-primary waves-effect waves-light float-right"><i class="fe-plus mr-1"></i>Add New</nuxt-link>
+                <nuxt-link to="/admin/vehicles/add" class="btn btn-primary waves-effect waves-light float-right"><i class="fe-plus mr-1"></i>Add New</nuxt-link>
             </div>
         </div>
         <div class="row">

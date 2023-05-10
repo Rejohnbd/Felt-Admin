@@ -1,12 +1,26 @@
 <template>
     <div>
         <CustomerPageHeader :title="title" :items="items" />
-        <div class="row">
+        <div v-if="isLoading">
+            <Loading />
+        </div>
+        <div class="row" v-else>
             <div class="col-lg-4 col-xl-4">
                 <div class="card">
                     <div class="card-body text-center">
-                        <img src="~/assets/images/users/avatar-1.jpg" class="rounded-circle avatar-xl img-thumbnail" alt="profile-image" />
-                        <h4 class="mt-3 mb-0">{{ this.formModel.first_name }} {{ this.formModel.last_name }}</h4>
+                        <!-- <img 
+                            v-if="preview"
+                            :src="preview != null ? preview : '~/assets/images/users/avatar-1.jpg' "
+                            class="rounded-circle avatar-xl img-thumbnail" 
+                            alt="profile-image" 
+                        /> -->
+                        <img 
+                            v-if="editImagePreview"
+                            :src="editImage == 'default.png' ? '~/assets/images/users/avatar-1.jpg' : $config.BaseUrl + editImage"
+                            class="rounded-circle avatar-xl img-thumbnail" 
+                            alt="profile-image" 
+                        />
+                        <h4 class="mt-3 mb-0">{{ this.userData.first_name }} {{ this.userData.last_name }}</h4>
                         <div class="text-left mt-3">
                             <h4 class="font-13 text-uppercase">About Me :</h4>
                             <div class="table-responsive">
@@ -14,27 +28,27 @@
                                     <tbody>
                                         <tr>
                                             <th scope="row">Full Name :</th>
-                                            <td class="text-muted">{{ this.formModel.first_name }} {{ this.formModel.last_name }}</td>
+                                            <td class="text-muted">{{ this.userData.first_name }} {{ this.userData.last_name }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Mobile :</th>
-                                            <td class="text-muted">{{ this.formModel.phone_number }}</td>
+                                            <td class="text-muted">{{ this.userData.phone_number }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Optional Mobile :</th>
-                                            <td class="text-muted">{{ this.formModel.phone_optional }}</td>
+                                            <td class="text-muted">{{ this.userData.phone_optional }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Email :</th>
-                                            <td class="text-muted">{{ this.formModel.email }}</td>
+                                            <td class="text-muted">{{ this.userData.email }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Optional Email :</th>
-                                            <td class="text-muted">{{ this.formModel.email_optional }}</td>
+                                            <td class="text-muted">{{ this.userData.email_optional }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Address :</th>
-                                            <td class="text-muted">{{ this.formModel.address }}</td>
+                                            <td class="text-muted">{{ this.userData.address }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -50,68 +64,21 @@
                         <b-tabs content-class="mt-1" pills class="navtab-bg">
                             <b-tab active>
                                 <template v-slot:title>
-                                    <i class="mdi mdi-face-profile mr-1"></i>Settings
+                                    <i class="mdi mdi-face-profile mr-1"></i>User Info
                                 </template>
-                                <form>
-                                    <h5 class="mb-3 text-uppercase bg-light p-2">
-                                        <i class="mdi mdi-account-circle mr-1"></i> Personal Info
-                                    </h5>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="firstname">First Name</label>
-                                                <input id="firstname" type="text" class="form-control" placeholder="Enter first name" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="lastname">Last Name</label>
-                                                <input id="lastname" type="text" class="form-control" placeholder="Enter last name" />
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <label for="userbio">Bio</label>
-                                                <textarea id="userbio" class="form-control" rows="4" placeholder="Write something..."></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="useremail">Email Address</label>
-                                                <input id="useremail" type="email" class="form-control" placeholder="Enter email" />
-                                                <span class="form-text text-muted">
-                                                    <small>
-                                                        If you want to change email please
-                                                        <a href="javascript: void(0);">click</a> here.
-                                                    </small>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="userpassword">Password</label>
-                                                <input id="userpassword" type="password" class="form-control" placeholder="Enter password" />
-                                                <span class="form-text text-muted">
-                                                    <small>
-                                                        If you want to change password please
-                                                        <a href="javascript: void(0);">click</a> here.
-                                                    </small>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="text-right">
-                                        <button type="submit" class="btn btn-success mt-2">
-                                            Update
-                                        </button>
-                                    </div>
-                                </form>
+                                <ProfileEditForm 
+                                    v-on:mounted="initEdit"
+                                    ref="editProfile"
+                                    v-on:form-submitted="updateProfile"
+                                />
+                            </b-tab>
+                            <b-tab>
+                                <template v-slot:title>
+                                    <i class="mdi mdi-settings-outline mr-1"></i>Password Change
+                                </template>
+                                <PasswordUpdateForm 
+                                    v-on:form-submitted="updatePassword"
+                                />
                             </b-tab>
                         </b-tabs>
                     </div>
@@ -122,9 +89,18 @@
 </template>
 
 <script>
+import Loading from '@/components/common/Loading.vue';
+import ProfileEditForm from '@/components/customer/setting/profile/ProfileEditForm.vue';
+import PasswordUpdateForm from '@/components/common/PasswordUpdateForm.vue';
+
 export default {
     name: 'CustomerProfilePage',
     middleware: ['auth', 'auth-customer'],
+    components: {
+        Loading,
+        ProfileEditForm,
+        PasswordUpdateForm
+    },
     data() {
         return {
             title: 'Profile',
@@ -142,18 +118,15 @@ export default {
                     active: true,
                 }
             ],
-            formModel: {
-                first_name: '',
-                last_name: '',
-                email: '',
-                email_optional: '',
-                phone_number: '',
-                phone_optional: '',
-                address: '',
-                user_status: ''
-            }
+            isLoading: false,
+            preview: null,
+            editImagePreview: false,
+            editImage: '',
+            image: '',
+            userData: {},
         }
     },
+
     head: {
         titleTemplate: '%s Customer Profile',
     },
@@ -161,18 +134,72 @@ export default {
         this.getUserProfile();
     },
     methods: {
+        initEdit() {
+            this.$refs.editProfile.getUserProfile();
+        },
         async getUserProfile(){
+            this.isLoading = true;
             await this.$axios.get('customer/profile')
                 .then((response) => {
-                    console.log(response.data.data)
-                    this.formModel = Object.assign({}, response.data.data);
-                    // this.loading = true;
-                    // this.servicePackages = response.data.data;
-                    
-                    // this.loading = false;
+                    this.userData = Object.assign({}, response.data.data);
+                    if(response.data.data.image != 'default.png') {
+                        this.editImage = response.data.data.image;
+                        this.editImagePreview = true;
+                    }
                 }).catch((error) => {
                     console.log(error)
-                })
+                });
+            this.isLoading = false;
+        },
+        async updateProfile(data) {
+            try {
+                await this.$axios.post('customer/profile', data)
+                    .then((response) => {
+                        if (response.status == 201) {
+                            this.$swal("Success!", response.data.message, "success");
+                            this.getUserProfile();
+                        }
+                    }).catch((error) => {
+                        if (error.response.status == 400) {
+                            this.$toast.error(error.response.data.message);
+                        } else {
+                            this.$toast.error("Some thing Happend Wrong. Try Again");
+                        }
+                        console.log(error);
+                    });
+            } catch (error) {
+                if (error.response.status == 401) {
+                    this.$toast.error(error.response.data.message);
+                } else {
+                    this.$toast.error("Connection Error");
+                }
+                console.log(error.response);
+            }
+        },
+        async updatePassword(data) {
+            try {
+                await this.$axios.post('customer/update-password', data)
+                    .then((response) => {
+                        if (response.status == 201) {
+                            this.$swal("Success!", response.data.message, "success");
+                        }
+                    })
+                    .catch((error) => {
+                        if (error.response.status == 400) {
+                            this.$toast.error(error.response.data.message);
+                        } else {
+                            this.$toast.error("Some thing Happend Wrong. Try Again");
+                        }
+                        console.log(error);
+                    });
+            } catch(error) {
+                if (error.response.status == 401) {
+                    this.$toast.error(error.response.data.message);
+                } else {
+                    this.$toast.error("Connection Error");
+                }
+                console.log(error.response);
+            }
         }
     }
 }
