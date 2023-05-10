@@ -8,12 +8,12 @@
             <div class="col-lg-4 col-xl-4">
                 <div class="card">
                     <div class="card-body text-center">
-                        <!-- <img 
-                            v-if="preview"
-                            :src="preview != null ? preview : '~/assets/images/users/avatar-1.jpg' "
+                        <img 
+                            v-if="!editImagePreview"
+                            src="~/assets/images/users/avatar-1.jpg"
                             class="rounded-circle avatar-xl img-thumbnail" 
                             alt="profile-image" 
-                        /> -->
+                        /> 
                         <img 
                             v-if="editImagePreview"
                             :src="editImage == 'default.png' ? '~/assets/images/users/avatar-1.jpg' : $config.BaseUrl + editImage"

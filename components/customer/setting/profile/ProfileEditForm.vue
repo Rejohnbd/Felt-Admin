@@ -191,11 +191,10 @@
                 if (!this.$v.$invalid) {
                     let formData = new FormData();
                     formData.append('first_name', this.formModel.first_name);
-                    formData.append('last_name', this.formModel.last_name);
-                    formData.append('email_optional', this.formModel.email_optional);
-                    formData.append('phone_optional', this.formModel.phone_optional);
+                    formData.append('last_name', this.formModel.last_name == null ? '' : this.formModel.last_name);
+                    formData.append('email_optional', this.formModel.email_optional == null ? '' : this.formModel.email_optional);
+                    formData.append('phone_optional', this.formModel.phone_optional == null ? '' : this.formModel.phone_optional);
                     formData.append('address', this.formModel.address);
-                    formData.append('image', this.image);
                     if (this.image != "") {
                         formData.append('image', this.image);
                     }
