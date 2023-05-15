@@ -4,23 +4,6 @@
     </div>
     <form @submit.prevent="formSubmitHandler" v-else>
         <div class="form-group">
-            <label for="deviceTypeName">
-                Device IMEI No<span class="text-danger">*</span>
-            </label>
-            <input 
-                v-model="formModel.device_imei" 
-                class="form-control" 
-                id="deviceTypeName"
-                :class="{ 'is-invalid': submitForm && $v.formModel.device_imei.$error }"
-                type="text" 
-                required 
-                placeholder="Enter Device Type Name" 
-            />
-            <div v-if="submitForm && !$v.formModel.device_imei.required" class="invalid-feedback">
-                Device IMEI No is required.
-            </div>
-        </div>
-        <div class="form-group">
             <div class="form-row">
                 <div class="col-md-6">
                     <label for="selectCustomer">
@@ -28,22 +11,22 @@
                     </label>
                     <multiselect 
                         id="selectCustomer"
-                        v-model="formModel.device_type" 
+                        v-model="formModel.customer" 
                         track-by="id" 
                         label="email" 
                         :options="customers"
                         placeholder="Select Customer" 
                         :allow-empty="false"
                         :custom-label="nameWithPhoneEmail"
-                        :class="{ 'is-invalid': submitForm && $v.formModel.device_imei.$error }"
+                        :class="{ 'is-invalid': submitForm && $v.formModel.customer.$error }"
                     />
-                    <div v-if="submitForm && $v.formModel.device_type.$error" class="invalid-feedback">
-                        <span v-if="!$v.formModel.device_type.required">Device Type is required.</span>
+                    <div v-if="submitForm && $v.formModel.customer.$error" class="invalid-feedback">
+                        <span v-if="!$v.formModel.customer.required">Customer is required.</span>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <label for="selectVehicleTypes">
-                        Select Vehicle Type<span class="text-danger">*</span>
+                        Select Vehicle Type <span class="text-danger">*</span>
                     </label>
                     <multiselect 
                         id="selectVehicleTypes"
@@ -53,77 +36,244 @@
                         :options="vehicleTypes"
                         placeholder="Select Vehicle Type" 
                         :allow-empty="false"
+                        
                         :class="{ 'is-invalid': submitForm && $v.formModel.vehicle_type.$error }"
                     />
                     <div v-if="submitForm && $v.formModel.vehicle_type.$error" class="invalid-feedback">
-                        <span v-if="!$v.formModel.vehicle_type.required">Device Type is required.</span>
+                        <span v-if="!$v.formModel.vehicle_type.required">Vehicle Type is required.</span>
                     </div>
-                </div>
-            </div>
-        </div>
-        <!-- <div class="form-group">
-            <div class="form-row">
-                <div class="col-md-6">
-                    <label for="deviceTypeName">
-                        Device SIM Number<span class="text-danger">*</span>
-                    </label>
-                    <input 
-                        v-model="formModel.device_sim" 
-                        class="form-control" 
-                        id="deviceTypeName"
-                        :class="{ 'is-invalid': submitForm && $v.formModel.device_sim.$error }"
-                        type="number" 
-                        required 
-                        placeholder="Enter Device Type Name" 
-                    />
-                    <div v-if="submitForm && $v.formModel.device_sim.$error" class="invalid-feedback">
-                        <span v-if="!$v.formModel.device_sim.required">Device SIM Number is Required.</span>
-                        <span v-if="!$v.formModel.device_sim.numeric">Provide Valid Device SIM Number.</span>
-                        <span v-if="!$v.formModel.device_sim.minLength">SIM number not Less than 11.</span>
-                        <span v-if="!$v.formModel.device_sim.maxLength">SIM number not Greater than 11.</span>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <label for="deviceTypeName">
-                        Device SIM Type<span class="text-danger">*</span>
-                    </label>
-                    <select 
-                        v-model="formModel.device_sim_type" 
-                        required 
-                        class="form-control"
-                        :class="{ 'is-invalid': submitForm && $v.formModel.device_sim.$error }"
-                    >
-                        <option value="">Select Sim Type</option>
-                        <option value="1">Pre Paid</option>
-                        <option value="2">Post Paid</option>
-                    </select>
-                    <div v-if="submitForm && $v.formModel.device_sim_type.$error" class="invalid-feedback">
-                        <span v-if="!$v.formModel.device_sim_type.required">Device SIM Type is required.</span>
-                        <span v-if="!$v.formModel.device_sim_type.numeric">Select Valid Device SIM Type.</span>
-                    </div> 
                 </div>
             </div>
         </div>
         <div class="form-group">
-            <label for="deviceTypeConfigureText">
-                Device Health Status <span class="text-danger">*</span>
-            </label>
-            <select 
-                v-model="formModel.device_health_status" 
-                required 
-                class="form-control"
-                :class="{ 'is-invalid': submitForm && $v.formModel.device_health_status.$error }"
-            >
-                <option value="">Select Health Status</option>
-                <option value="1">Running</option>
-                <option value="2">Maintenance</option>
-                <option value="0">Spoiled</option>
-            </select>
-            <div v-if="submitForm && $v.formModel.device_health_status.$error" class="invalid-feedback">
-                <span v-if="!$v.formModel.device_health_status.required">Device Health Status is required.</span>
-                <span v-if="!$v.formModel.device_health_status.numeric">Select Valid Device Status Health.</span>
+            <div class="form-row">
+                <div class="col-md-6">
+                    <label for="selectPackage">
+                        Select Package <span class="text-danger">*</span>
+                    </label>
+                    <multiselect 
+                        id="selectPackage"
+                        v-model="formModel.service_package" 
+                        track-by="id" 
+                        label="package_name" 
+                        :options="servicePackage"
+                        placeholder="Select Service Package" 
+                        :allow-empty="false"
+                        :class="{ 'is-invalid': submitForm && $v.formModel.service_package.$error }"
+                    />
+                    <div v-if="submitForm && $v.formModel.service_package.$error" class="invalid-feedback">
+                        <span v-if="!$v.formModel.service_package.required">Vehicle Type is required.</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="selectDevice">
+                        Select Device
+                    </label>
+                    <multiselect 
+                        id="selectDevice"
+                        v-model="formModel.device" 
+                        track-by="id" 
+                        label="device_imei" 
+                        :options="devices"
+                        placeholder="Select Device" 
+                        :allow-empty="false"
+                    />
+                </div>
             </div>
-        </div> -->
+        </div>
+        <div class="form-group">
+            <div class="form-row">
+                <div class="col-md-6">
+                    <label for="vehicleRegistration">
+                        Device Registration Number <span class="text-danger">*</span>
+                    </label>
+                    <input 
+                        v-model="formModel.registration_number" 
+                        class="form-control" 
+                        id="vehicleRegistration"
+                        :class="{ 'is-invalid': submitForm && $v.formModel.registration_number.$error }"
+                        type="text" 
+                        required 
+                        placeholder="Enter Vehicle Registration" 
+                    />
+                    <div v-if="submitForm && !$v.formModel.registration_number.required" class="invalid-feedback">
+                        Vehicle Registration Number is Require
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="vehicleRegistrationDate">
+                        Vehicle Registration Expire Date <span class="text-danger">*</span>
+                    </label>
+                    <date-picker 
+                        v-model="formModel.registration_expire_date" 
+                        id="vehicleRegistrationDate"
+                        firstDayOfWeek="0" 
+                        lang="en"
+                        confirm
+                        format="DD/MM/YYYY"
+                        :class="{ 'is-invalid': submitForm && $v.formModel.registration_expire_date.$error }"
+                        placeholder="Enter Vehicle Registration Expire Date"
+                    />
+                    <div v-if="submitForm && !$v.formModel.registration_expire_date.required" class="invalid-feedback">
+                        Vehicle Registration Number is Require
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-row">
+                <div class="col-md-6">
+                    <label for="vehicleInsuraceDate">
+                        Vehicle Insurance Date <span class="text-danger">*</span>
+                    </label>
+                    <date-picker 
+                        v-model="formModel.insurance_expire_date" 
+                        id="vehicleInsuraceDate"
+                        firstDayOfWeek="0" 
+                        lang="en"
+                        confirm
+                        format="DD/MM/YYYY"
+                        :class="{ 'is-invalid': submitForm && $v.formModel.insurance_expire_date.$error }"
+                        placeholder="Enter Vehicle Insurance Date"
+                    />
+                    <div v-if="submitForm && !$v.formModel.insurance_expire_date.required" class="invalid-feedback">
+                        Vehicle Insurance Date is Require
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="vehicleTaxTokenDate">
+                        Vehicle Tax Token Expire Date <span class="text-danger">*</span>
+                    </label>
+                    <date-picker 
+                        v-model="formModel.tax_token_expire_date"
+                        id="vehicleTaxTokenDate"
+                        firstDayOfWeek="0" 
+                        lang="en"
+                        confirm
+                        format="DD/MM/YYYY"
+                        :class="{ 'is-invalid': submitForm && $v.formModel.tax_token_expire_date.$error }"
+                        placeholder="Enter Vehicle Tax Token Expire Date"
+                    />
+                    <div v-if="submitForm && !$v.formModel.tax_token_expire_date.required" class="invalid-feedback">
+                        Vehicle Registration Number Require
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-row">
+                <div class="col-md-6">
+                    <label for="vehicleBrand">
+                        Vehicle Brand Name
+                    </label>
+                    <input 
+                        v-model="formModel.vehicle_brand" 
+                        class="form-control" 
+                        id="vehicleBrand"
+                        type="text" 
+                        placeholder="Enter Vehicle Brand" 
+                    />
+                </div>
+                <div class="col-md-6">
+                    <label for="vehicleModelYear">
+                        Vehicle Model Year
+                    </label>
+                    <date-picker 
+                        v-model="formModel.vehicle_model_year"
+                        id="vehicleModelYear"
+                        firstDayOfWeek="0" 
+                        lang="en"
+                        confirm
+                        type="year"
+                        placeholder="Enter Vehicle Model Year"
+                    />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-row">
+                <div class="col-md-6">
+                    <label for="vehicleFuelCapacity">
+                        Vehicle Fuel Capacity <span class="text-danger">*</span>
+                    </label>
+                    <input 
+                        v-model="formModel.fuel_capacity" 
+                        class="form-control" 
+                        id="vehicleFuelCapacity"
+                        type="number" 
+                        required 
+                        step="any"
+                        placeholder="Enter Vehicle Fuel Capacity" 
+                        :class="{ 'is-invalid': submitForm && $v.formModel.fuel_capacity.$error }"
+                    />
+                    <div v-if="submitForm && !$v.formModel.fuel_capacity.required" class="invalid-feedback">
+                        Vehicle Fuel Capacity is Require
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="vehicleFuelMilage">
+                        Vehicle Milage(kpl) <span class="text-danger">*</span>
+                    </label>
+                    <input 
+                        v-model="formModel.vehicle_kpl" 
+                        class="form-control" 
+                        id="vehicleFuelMilage"
+                        type="number" 
+                        step="any"
+                        required 
+                        placeholder="Enter Vehicle Milage" 
+                        :class="{ 'is-invalid': submitForm && $v.formModel.vehicle_kpl.$error }"
+                    />
+                    <div v-if="submitForm && !$v.formModel.vehicle_kpl.required" class="invalid-feedback">
+                        Vehicle Milage is Required
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-row">
+                <div class="col-md-6">
+                    <label for="paymentActiveStatus">
+                        Vehicle Payment Active Status<span class="text-danger">*</span>
+                    </label>
+                    <select 
+                        id="paymentActiveStatus"
+                        v-model="formModel.payment_status" 
+                        required 
+                        class="form-control"
+                        :class="{ 'is-invalid': submitForm && $v.formModel.payment_status.$error }"
+                    >
+                        <option value="">Select Vehicle Payment Active Status</option>
+                        <option value="1">Payment Enabled</option>
+                        <option value="0">Payment Disabled</option>
+                    </select>
+                    <div v-if="submitForm && $v.formModel.payment_status.$error" class="invalid-feedback">
+                        <span v-if="!$v.formModel.payment_status.required">Vehicle Payment Active Status is Required.</span>
+                        <span v-if="!$v.formModel.payment_status.numeric">Select Valid Vehicle Payment Active Status Type.</span>
+                    </div> 
+                </div>
+                <div class="col-md-6">
+                    <label for="vehicleServiceStatus">
+                        Vehicle Service Status <span class="text-danger">*</span>
+                    </label>
+                    <select 
+                        id="vehicleServiceStatus"
+                        v-model="formModel.service_status" 
+                        required 
+                        class="form-control"
+                        :class="{ 'is-invalid': submitForm && $v.formModel.service_status.$error }"
+                    >
+                        <option value="">Select Vehicle Service Status</option>
+                        <option value="0">Not Activate</option>
+                        <option value="1">Activated</option>
+                    </select>
+                    <div v-if="submitForm && $v.formModel.service_status.$error" class="invalid-feedback">
+                        <span v-if="!$v.formModel.service_status.required">Vehicle Service Status is Required.</span>
+                        <span v-if="!$v.formModel.service_status.numeric">Select Valid Vehicle Service Status.</span>
+                    </div> 
+                </div>
+            </div>
+        </div>
         
         <div class="form-group text-right m-b-0">
             <button class="btn btn-primary" type="submit" v-if="operation == 'create'">Submit</button>
@@ -137,8 +287,9 @@
 </template>
 
 <script>
-import { required, numeric, minLength, maxLength } from 'vuelidate/lib/validators';
+import { required, numeric, decimal } from 'vuelidate/lib/validators';
 import Multiselect from 'vue-multiselect';
+import DatePicker from 'vue2-datepicker'
 import Loading from '@/components/common/Loading.vue';
 
 export default {
@@ -150,40 +301,49 @@ export default {
     },
     components: {
         Loading,
-        Multiselect
+        Multiselect,
+        DatePicker
     },
     data() {
         return {
             isLoading: false,
             customers: [],
             vehicleTypes: [],
+            servicePackage: [],
+            devices: [],
             formModel: {
-                device_imei: '',
-                device_type: '',
-                device_sim: '',
-                device_sim_type: '',
-                device_health_status: ''
+                customer: '',
+                vehicle_type: '',
+                service_package: '',
+                device: '',
+                registration_number: '',
+                registration_expire_date: '',
+                insurance_expire_date: '',
+                tax_token_expire_date: '',
+                vehicle_brand: '',
+                vehicle_model_year: '',
+                fuel_capacity: '',
+                vehicle_kpl: '',
+                payment_status: '',
+                service_status: ''
             },
             submitForm: false,
         }
     },
     validations: {
         formModel: {
-            device_imei: {
-                required
-            },
-            device_type: {
-                required
-            },
-            device_sim: {
-                required, numeric, minLength: minLength(11), maxLength: maxLength(11)
-            },
-            device_sim_type: {
-                required, numeric
-            },
-            device_health_status: {
-                required, numeric
-            }
+            customer: { required },
+            vehicle_type: { required },
+            service_package: { required },
+            device: { required },
+            registration_number: { required },
+            registration_expire_date: { required },
+            insurance_expire_date: { required },
+            tax_token_expire_date: { required },
+            fuel_capacity: { required, decimal },
+            vehicle_kpl: { required, decimal },
+            payment_status: { required, numeric },
+            service_status: { required, numeric }
         }
     },
     created() {
@@ -204,42 +364,61 @@ export default {
                 }).catch((error) => {
                     console.log(error)
                 });
+            await this.$axios.get('admin/service-packages')
+                .then((response) => {
+                    this.servicePackage = response.data.data;
+                }).catch((error) => {
+                    console.log(error)
+                });
+            await this.$axios.get('admin/devices?type=assign_to_customer')
+                .then((response) => {
+                    this.devices = response.data.data;
+                }).catch((error) => {
+                    console.log(error)
+                });
             this.isLoading = false;
         },
         nameWithPhoneEmail({ email, user_details }) {
             return `${user_details.first_name} ${user_details.last_name != null ? user_details.last_name : ''} - ${email} - ${user_details.phone_number}`;
         },
-        // async getDeviceById() {
-        //     try {
-        //         await this.$axios.get("admin/devices/" + this.$route.params.id)
-        //             .then((response) => {
-        //                 if (response.status == 200) {
-        //                     this.formModel = Object.assign({}, response.data.data);
-        //                 }
-        //             }).catch((error) => {
-        //                 if (error.response.status == 404) {
-        //                     this.$toast.error(error.response.data.message);
-        //                     this.$router.push({
-        //                         path: "/admin/devices",
-        //                     });
-        //                 }
-        //                 console.log(error.response.data);
-        //             });
-        //     } catch (error) {
-        //         this.$toast.error("Connection Error");
-        //         console.log('Connection Error:', error);
-        //     }
-        // },
-        // async formSubmitHandler() {
-        //     this.submitForm = true;
-        //     this.$v.$touch();
-        //     if (!this.$v.$invalid) {
-        //         this.$emit("form-submitted", this.formModel);
-        //         this.submitForm = false;
-        //     } else {
-        //         return;
-        //     }
-        // }
+        formSubmitHandler() {
+            console.log(this.$moment(new Date()).format('YYYY-MM-DD'))
+            this.submitForm = true;
+            this.$v.$touch();
+            if (!this.$v.$invalid) {
+                let deviceId = '';
+                let vehicleModelYear = '';
+
+                if(Object.keys(this.formModel.device).length > 0) {
+                    deviceId = this.formModel.device.id;
+                }
+
+                if(this.formModel.vehicle_model_year != ''){
+                    vehicleModelYear = this.$moment(this.formModel.vehicle_model_year).format('YYYY')
+                }
+
+                let data = {
+                    customer_id : this.formModel.customer.id,
+                    vehicle_type_id: this.formModel.vehicle_type.id,
+                    service_package_id: this.formModel.service_package.id,
+                    device_id: deviceId,
+                    registration_number: this.formModel.registration_number,
+                    registration_expire_date: this.$moment(this.formModel.registration_expire_date).format('YYYY-MM-DD'),
+                    insurance_expire_date: this.$moment(this.formModel.insurance_expire_date).format('YYYY-MM-DD'),
+                    tax_token_expire_date: this.$moment(this.formModel.tax_token_expire_date).format('YYYY-MM-DD'),
+                    vehicle_brand: this.formModel.vehicle_brand,
+                    vehicle_model_year: vehicleModelYear,
+                    fuel_capacity: this.formModel.fuel_capacity,
+                    vehicle_kpl: this.formModel.vehicle_kpl,
+                    payment_status: this.formModel.payment_status,
+                    service_status: this.formModel.service_status
+                }
+                this.$emit("form-submitted", data);
+                this.submitForm = false;
+            } else {
+                return;
+            }
+        }
     }
 }
 </script>

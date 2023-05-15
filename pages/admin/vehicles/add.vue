@@ -56,20 +56,13 @@ export default {
     },
     methods: {
         async create(data) {
-            let postData = {
-                device_imei: data.device_imei,
-                device_type_id: data.device_type.id,
-                device_sim: data.device_sim,
-                device_sim_type: data.device_sim_type,
-                device_health_status: data.device_health_status
-            }
             try {
-                await this.$axios.post('admin/devices', postData)
+                await this.$axios.post('admin/vehicles', data)
                     .then((response) => {
                         if(response.status == 201) {
                             this.$swal("Success!", response.data.message, "success");
                             this.$router.push({
-                                path: "/admin/devices"
+                                path: "/admin/vehicles"
                             });
                         }
                     }).catch((error) => {
