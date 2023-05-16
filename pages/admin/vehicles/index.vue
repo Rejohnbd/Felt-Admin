@@ -50,24 +50,49 @@
                                 <template v-slot:cell(vehicle_type_image)="items">
                                     <span class="b-avatar badge-secondary rounded">
                                         <span class="b-avatar-img">
-                                            <img :src="$config.BaseUrl + items.item.vehicle_type_image" :alt="items.item.vehicle_type_name" />
+                                            <img :src="$config.BaseUrl + items.item.vehicle_type.vehicle_type_image" :alt="items.item.vehicle_type.vehicle_type_image" />
                                         </span>
                                     </span>
                                 </template>
-
+                                <template v-slot:cell(customer_info)="items">
+                                    <b>Name: </b> {{ items.item.customer_info.user_details.first_name }} {{ items.item.customer_info.user_details.last_name }}
+                                    <br/>
+                                    <b>Email: </b> {{ items.item.customer_info.email }}
+                                    <br/>
+                                    <b>Phone: </b> {{ items.item.customer_info.user_details.phone_number }}
+                                </template>
+                                <template v-slot:cell(service_package)="items">
+                                    {{ items.item.service_package.package_name }}
+                                </template>
+                                <template v-slot:cell(device_info)="items">
+                                    {{ items.item.device_info.device_type.device_type_name }} <br/>
+                                    <b>IMEI:</b> {{ items.item.device_info.device_imei }}
+                                </template>
+                                <template v-slot:cell(installation_status)="items">
+                                    <span class="badge badge-soft-danger" v-if="items.item.installation_status == 0">Not Installed</span>
+                                    <span class="badge badge-soft-success" v-if="items.item.installation_status == 1">Installed</span>
+                                </template>
+                                <template v-slot:cell(payment_status)="items">
+                                    <span class="badge badge-soft-danger" v-if="items.item.payment_status == 0">Not Active</span>
+                                    <span class="badge badge-soft-success" v-if="items.item.payment_status == 1">Actived</span>
+                                </template>
+                                <template v-slot:cell(service_status)="items">
+                                    <span class="badge badge-soft-danger" v-if="items.item.service_status == 0">Not Started</span>
+                                    <span class="badge badge-soft-success" v-if="items.item.service_status == 1">Started</span>
+                                </template>
                                 <template v-slot:cell(action)="items">
                                     <div class="button-list">
                                         <nuxt-link 
-                                            :to="`/admin/setting/vehicle-type/${items.item.id}/edit`" 
+                                            to="#" 
                                             v-b-tooltip.hover 
-                                            :title="`Edit Device Type ${items.item.device_type_name}`" 
+                                            :title="`Edit Vehicle ${items.item.registration_number}`" 
                                             class="btn btn-sm btn-purple"
                                         >
                                             <i class="mdi mdi-circle-edit-outline"></i>
                                         </nuxt-link>
                                         <button 
                                             v-b-tooltip.hover 
-                                            :title="`Delete Device Type ${items.item.device_type_name}`" 
+                                            :title="`Delete Vehicle ${items.item.registration_number}`" 
                                             type="button" 
                                             class="btn btn-sm btn-danger"
                                             @click="deleteHandler(items.item.id)"
@@ -133,7 +158,31 @@ export default {
                     sortable: true
                 },
                 {
-                    key: "vehicle_type_name",
+                    key: "registration_number",
+                    sortable: true
+                },
+                {
+                    key: "customer_info",
+                    sortable: true
+                },
+                {
+                    key: "service_package",
+                    sortable: true
+                },
+                {
+                    key: "device_info",
+                    sortable: true
+                },
+                {
+                    key: "installation_status",
+                    sortable: true
+                },
+                {
+                    key: "payment_status",
+                    sortable: true
+                },
+                {
+                    key: "service_status",
                     sortable: true
                 },
                 {
@@ -156,13 +205,14 @@ export default {
     },
     methods: {
         async getAllDeviceType() {
-            await this.$axios.get("admin/vehicle-types").then((response) => {
-                this.loading = true;
-                this.tableData = response.data.data;
-                this.loading = false;
-            }).catch((error) => {
-                console.log(error);
-            });
+            await this.$axios.get("admin/vehicles")
+                .then((response) => {
+                    this.loading = true;
+                    this.tableData = response.data.data;
+                    this.loading = false;
+                }).catch((error) => {
+                    console.log(error);
+                });
         },
         async deleteHandler(deleteId) {
             console.log(deleteId);
