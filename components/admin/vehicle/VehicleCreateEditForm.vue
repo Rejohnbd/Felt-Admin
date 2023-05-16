@@ -36,7 +36,6 @@
                         :options="vehicleTypes"
                         placeholder="Select Vehicle Type" 
                         :allow-empty="false"
-                        
                         :class="{ 'is-invalid': submitForm && $v.formModel.vehicle_type.$error }"
                     />
                     <div v-if="submitForm && $v.formModel.vehicle_type.$error" class="invalid-feedback">
@@ -74,6 +73,7 @@
                         v-model="formModel.device" 
                         track-by="id" 
                         label="device_imei" 
+                        :custom-label="deviceImeiWithPhone"
                         :options="devices"
                         placeholder="Select Device" 
                         :allow-empty="false"
@@ -372,6 +372,7 @@ export default {
                 });
             await this.$axios.get('admin/devices?type=assign_to_customer')
                 .then((response) => {
+                    console.log(response.data.data);
                     this.devices = response.data.data;
                 }).catch((error) => {
                     console.log(error)
@@ -380,6 +381,9 @@ export default {
         },
         nameWithPhoneEmail({ email, user_details }) {
             return `${user_details.first_name} ${user_details.last_name != null ? user_details.last_name : ''} - ${email} - ${user_details.phone_number}`;
+        },
+        deviceImeiWithPhone({ device_imei, device_sim }) {
+            return `${device_imei} (${device_sim})`;
         },
         formSubmitHandler() {
             console.log(this.$moment(new Date()).format('YYYY-MM-DD'))
