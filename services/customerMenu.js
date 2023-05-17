@@ -27,6 +27,24 @@ export const customerMenu = [
     ],
   },
   {
+    id: 5,
+    label: "menuitems.vehicle.text",
+    isTitle: true,
+  },
+  {
+    id: 6,
+    label: "menuitems.vehicles.text",
+    icon: "ri-car-fill",
+    isMenuCollapsed: false,
+    subItems: [
+      {
+        id: 7,
+        label: "menuitems.vehicles.list.all-vehicle",
+        link: "/customer/vehicles",
+      },
+    ],
+  },
+  {
     id: 100,
     label: "menuitems.setting.text",
     isTitle: true,
