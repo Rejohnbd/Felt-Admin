@@ -149,6 +149,12 @@
         "all-vehicle": "সমস্ত যানবাহন"
       }
     },
+    "drivers": {
+      "text": "ড্রাইভার",
+      "list": {
+        "all-driver": "সব ড্রাইভার"
+      }
+    },
     "setting": {
       "text": "সেটিংস",
       "list": {

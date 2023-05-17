@@ -45,6 +45,19 @@ export const customerMenu = [
     ],
   },
   {
+    id: 8,
+    label: "menuitems.drivers.text",
+    icon: " ri-group-fill",
+    isMenuCollapsed: false,
+    subItems: [
+      {
+        id: 9,
+        label: "menuitems.drivers.list.all-driver",
+        link: "/customer/drivers",
+      },
+    ],
+  },
+  {
     id: 100,
     label: "menuitems.setting.text",
     isTitle: true,

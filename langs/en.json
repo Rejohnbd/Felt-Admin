@@ -150,6 +150,12 @@
         "all-vehicle": "All Vehicle"
       }
     },
+    "drivers": {
+      "text": "Drivers",
+      "list": {
+        "all-driver": "All Driver"
+      }
+    },
     "setting": {
       "text": "Setting",
       "list": {

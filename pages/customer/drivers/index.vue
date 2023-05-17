@@ -31,41 +31,40 @@
                         </div>
                         <!-- Table -->
                         <div class="table-responsive mb-0">
-                            <b-table 
-                                :items="tableData" 
-                                :fields="fields" 
-                                responsive="sm" 
-                                :per-page="perPage" 
-                                :current-page="currentPage" 
-                                :sort-by.sync="sortBy" 
-                                :sort-desc.sync="sortDesc" 
-                                :filter="filter" 
-                                :filter-included-fields="filterOn"
-                            >
+                            <b-table :items="tableData" :fields="fields" responsive="sm" :per-page="perPage" :current-page="currentPage" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" :filter="filter" :filter-included-fields="filterOn">
                                 <template v-slot:cell(vehicle_type)="items">
                                     <span class="b-avatar badge-secondary rounded mr-2">
                                         <span class="b-avatar-img">
-                                            <img :src="$config.BaseUrl + items.item.vehicle_type.vehicle_type_image" :alt="items.item.vehicle_type.vehicle_type_image" />
+                                            <img :src="$config.BaseUrl + items.item.vehicle_type_image" :alt="items.item.vehicle_type_name" />
                                         </span>
                                     </span>
                                     {{ items.item.vehicle_brand }} {{ items.item.vehicle_model_year }}
                                 </template>
                                 <template v-slot:cell(driver_info)="items">
-                                    <b>Name: </b> {{ items.item.driver_info.user_details.first_name }} {{ items.item.driver_info.user_details.last_name }}
-                                    <br/>
-                                    <b>Email: </b> {{ items.item.driver_info.email }}
-                                    <br/>
-                                    <b>Phone: </b> {{ items.item.driver_info.user_details.phone_number }}
+                                    <div class="d-flex">
+                                        <span class="b-avatar badge-secondary rounded mr-2">
+                                            <span class="b-avatar-img">
+                                                <img src="~/assets/images/users/avatar-1.jpg" :alt="items.item.first_name" />
+                                            </span>
+                                        </span>
+                                        <div>
+                                            <b>Name: </b> {{ items.item.first_name }} {{ items.item.last_name }}
+                                            <br />
+                                            <b>Email: </b> {{ items.item.email }}
+                                            <br />
+                                            <b>Phone: </b> {{ items.item.phone_number }} {{ items.item.phone_optional }}
+                                        </div>
+                                    </div>
                                 </template>
-                                
-                                <template v-slot:cell(service_package)="items">
+
+                                <!-- <template v-slot:cell(service_package)="items">
                                     {{ items.item.service_package.package_name }} ({{ items.item.service_package.subscription_fee }} Tk/Month)
-                                </template>
-                                <template v-slot:cell(device_info)="items">
-                                    {{ items.item.device_info.device_type.device_type_name }} <br/>
+                                </template> -->
+                                <!-- <template v-slot:cell(device_info)="items">
+                                    {{ items.item.device_info.device_type.device_type_name }} <br />
                                     <b>IMEI:</b> {{ items.item.device_info.device_imei }}
-                                </template>
-                                <template v-slot:cell(installation_status)="items">
+                                </template> -->
+                                <!-- <template v-slot:cell(installation_status)="items">
                                     <span class="badge badge-soft-danger" v-if="items.item.installation_status == 0">Not Installed</span>
                                     <span class="badge badge-soft-success" v-if="items.item.installation_status == 1">Installed</span>
                                 </template>
@@ -76,7 +75,7 @@
                                 <template v-slot:cell(service_status)="items">
                                     <span class="badge badge-soft-danger" v-if="items.item.service_status == 0">Not Started</span>
                                     <span class="badge badge-soft-success" v-if="items.item.service_status == 1">Started</span>
-                                </template>
+                                </template> -->
                                 <!-- <template v-slot:cell(action)="items">
                                     <div class="button-list">
                                         <nuxt-link 
@@ -118,91 +117,86 @@
 </template>
 
 <script>
-import Loading from '@/components/common/Loading.vue';
+    import Loading from '@/components/common/Loading.vue';
 
-export default {
-    name: "VehicleListPage",
-    middleware: ["auth", "auth-customer"],
-    components: {
-        Loading
-    },
-    data() {
-        return {
-            title: "Vehicle List",
-            items: [
-                {
-                    text: "Dashobard",
-                    href: "#",
-                },
-                {
-                    text: "Vehicle List",
-                    active: true,
-                },
-            ],
-            loading: false,
-            tableData: [],
-            totalRows: 1,
-            currentPage: 1,
-            perPage: 10,
-            pageOptions: [10, 25, 50, 100],
-            filter: null,
-            filterOn: [],
-            sortBy: "registration_number",
-            sortDesc: false,
-            fields: [
-                {
-                    label: 'Vehicle Type',
-                    key: 'vehicle_type'
-                },
-                {
-                    key: "registration_number",
-                    sortable: true
-                },
-                {
-                    key: "driver_info",
-                    sortable: true
-                },
-                {
-                    key: "service_package",
-                    sortable: true
-                },
-                {
-                    key: "device_info",
-                    sortable: true
-                },
-                {
-                    key: "payment_status",
-                    sortable: true
-                },
-                {
-                    key: "action",
-                    sortable: true
-                },
-            ],
-        };
-    },
-    head: {
-        titleTemplate: "%s Vehicle List",
-    },
-    computed: {
-        rows() {
-            return this.tableData.length;
-        }
-    },
-    created() {
-        this.getAllDeviceType();
-    },
-    methods: {
-        async getAllDeviceType() {
-            await this.$axios.get("customer/customer-vehicles")
-                .then((response) => {
-                    this.loading = true;
-                    this.tableData = response.data.data;
-                    this.loading = false;
-                }).catch((error) => {
-                    console.log(error);
-                });
+    export default {
+        name: "DriverListPage",
+        middleware: ["auth", "auth-customer"],
+        components: {
+            Loading
+        },
+        data() {
+            return {
+                title: "Driver List",
+                items: [{
+                        text: "Dashobard",
+                        href: "#",
+                    },
+                    {
+                        text: "Driver List",
+                        active: true,
+                    },
+                ],
+                loading: false,
+                tableData: [],
+                totalRows: 1,
+                currentPage: 1,
+                perPage: 10,
+                pageOptions: [10, 25, 50, 100],
+                filter: null,
+                filterOn: [],
+                sortBy: "registration_number",
+                sortDesc: false,
+                fields: [
+                    {
+                        label: 'Vehicle Type',
+                        key: 'vehicle_type'
+                    },
+                    {
+                        key: "registration_number",
+                        sortable: true
+                    },
+                    {
+                        key: "driver_info",
+                        sortable: true
+                    },
+                    {
+                        key: "driver_license",
+                        sortable: true
+                    },
+                    {
+                        key: "license_expire_date",
+                        sortable: true
+                    },
+                    {
+                        key: "action",
+                        sortable: true
+                    }
+                ],
+            };
+        },
+        head: {
+            titleTemplate: "%s Vehicle List",
+        },
+        computed: {
+            rows() {
+                return this.tableData.length;
+            }
+        },
+        created() {
+            this.getAllDeviceType();
+        },
+        methods: {
+            async getAllDeviceType() {
+                await this.$axios.get("customer/customer-drivers")
+                    .then((response) => {
+                        this.loading = true;
+                        this.tableData = response.data.data;
+                        this.loading = false;
+                    }).catch((error) => {
+                        console.log(error);
+                    });
+            }
         }
     }
-}
 </script>
