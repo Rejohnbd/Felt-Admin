@@ -5,11 +5,11 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">Add Device Type</h4>
+                        <h4 class="header-title">Add Vehilce Type</h4>
                         <div class="row">
                             <div class="col-12">
                                 <div class="p-2">
-                                    <DeviceTypeCreateEditForm
+                                    <VehicleTypeCreateEditForm
                                         v-on:form-submitted="create"
                                         operation="create"
                                     />
@@ -24,17 +24,17 @@
 </template>
 
 <script>
-import DeviceTypeCreateEditForm from '@/components/admin/setting/device-type/DeviceTypeCreateEditForm.vue';
+import VehicleTypeCreateEditForm from '@/components/admin/setting/vehicle-type/VehicleTypeCreateEditForm.vue';
 
 export default {
-    name: 'AddDeviceTypePage',
+    name: 'AddVehicleTypePage',
     middleware: ['auth', 'auth-admin'],
     components: {
-        DeviceTypeCreateEditForm
+        VehicleTypeCreateEditForm
     },
     data() {
         return {
-            title: 'Device Type Add',
+            title: 'Vehicle Type Add',
             items: [
                 {
                     text: 'Dashobard',
@@ -45,28 +45,28 @@ export default {
                     href: '#'
                 },
                 {
-                    text: 'Device Types',
+                    text: 'Vehicle Types',
                     href: '#'
                 },
                 {
-                    text: 'Device Type Add',
+                    text: 'Vehicle Type Add',
                     active: true,
                 },
             ],
         }
     },
     head: {
-        titleTemplate: '%s Device Type Add',
+        titleTemplate: '%s Vehicle Type Add',
     },
     methods: {
         async create(data) {
             try {
-                await this.$axios.post('admin/device-types', data)
+                await this.$axios.post('admin/vehicle-types', data)
                     .then((response) => {
                         if(response.status == 201) {
                             this.$swal("Success!", response.data.message, "success");
                             this.$router.push({
-                                path: "/admin/setting/device-type",
+                                path: "/admin/setting/vehicle-type",
                             });
                         }
                     }).catch((error) => {

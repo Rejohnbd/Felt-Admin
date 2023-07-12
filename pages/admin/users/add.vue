@@ -5,13 +5,16 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">Add Device Type</h4>
+                        <h4 class="header-title">Add User</h4>
                         <div class="row">
                             <div class="col-12">
                                 <div class="p-2">
-                                    <DeviceTypeCreateEditForm
+                                    <UserCreateForm
+                                        v-on:mounted="initCreate"
+                                        ref="addUserForm"
                                         v-on:form-submitted="create"
                                         operation="create"
+                                        :submitLoading="submitLoading"
                                     />
                                 </div>
                             </div>
@@ -24,49 +27,51 @@
 </template>
 
 <script>
-import DeviceTypeCreateEditForm from '@/components/admin/setting/device-type/DeviceTypeCreateEditForm.vue';
+import UserCreateForm from '@/components/admin/users/UserCreateForm.vue';
 
 export default {
-    name: 'AddDeviceTypePage',
+    name: 'AddUserPage',
     middleware: ['auth', 'auth-admin'],
     components: {
-        DeviceTypeCreateEditForm
+        UserCreateForm
     },
     data() {
         return {
-            title: 'Device Type Add',
+            title: 'User Add',
             items: [
                 {
                     text: 'Dashobard',
                     href: '#',
                 },
                 {
-                    text: 'Setting',
+                    text: 'Users',
                     href: '#'
                 },
                 {
-                    text: 'Device Types',
-                    href: '#'
-                },
-                {
-                    text: 'Device Type Add',
+                    text: 'User Add',
                     active: true,
                 },
             ],
+            submitLoading: false
         }
     },
     head: {
-        titleTemplate: '%s Device Type Add',
+        titleTemplate: '%s User Add',
     },
     methods: {
+        initCreate() {
+            this.$refs.addUserForm.getUserRoles();
+            this.$refs.addUserForm.getCustomerUsers();
+        },
         async create(data) {
+            this.submitLoading = true;
             try {
-                await this.$axios.post('admin/device-types', data)
+                await this.$axios.post('admin/users', data)
                     .then((response) => {
                         if(response.status == 201) {
                             this.$swal("Success!", response.data.message, "success");
                             this.$router.push({
-                                path: "/admin/setting/device-type",
+                                path: "/admin/users"
                             });
                         }
                     }).catch((error) => {
@@ -75,10 +80,12 @@ export default {
                         } 
                         console.log(error.response.data);
                     });
+
             } catch (error) {
                 this.$toast.error("Connection Error");
                 console.log('Connection Error:', error);
             }
+            this.submitLoading = false;
         }
     }
 }

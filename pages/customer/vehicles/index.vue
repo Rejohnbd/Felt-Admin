@@ -1,11 +1,6 @@
 <template>
     <div>
         <AdminPageHeader :title="title" :items="items" />
-        <div class="row mb-2">
-            <div class="col-12">
-                <nuxt-link to="/admin/devices/add" class="btn btn-primary waves-effect waves-light float-right"><i class="fe-plus mr-1"></i>Add New</nuxt-link>
-            </div>
-        </div>
         <div class="row">
             <div class="col-12" v-if="loading">
                 <Loading />
@@ -42,32 +37,59 @@
                                 responsive="sm" 
                                 :per-page="perPage" 
                                 :current-page="currentPage" 
+                                :sort-by.sync="sortBy" 
+                                :sort-desc.sync="sortDesc" 
                                 :filter="filter" 
                                 :filter-included-fields="filterOn"
                             >
-                                <template v-slot:cell(device_use_status)="items">
-                                    <span class="badge badge-soft-success" v-if="items.item.device_use_status == 0">Not Used Yet</span>
-                                    <span class="badge badge-soft-danger" v-if="items.item.device_use_status == 1">Already Used</span>
+                                <template v-slot:cell(vehicle_type)="items">
+                                    <span class="b-avatar badge-secondary rounded mr-2">
+                                        <span class="b-avatar-img">
+                                            <img :src="$config.BaseUrl + items.item.vehicle_type.vehicle_type_image" :alt="items.item.vehicle_type.vehicle_type_image" />
+                                        </span>
+                                    </span>
+                                    {{ items.item.vehicle_brand }} {{ items.item.vehicle_model_year }}
                                 </template>
-                                <template v-slot:cell(device_health_status)="items">
-                                    <span class="badge badge-soft-danger" v-if="items.item.device_health_status == 0">Spoiled</span>
-                                    <span class="badge badge-soft-success" v-if="items.item.device_health_status == 1">Running</span>
-                                    <span class="badge badge-soft-warning" v-if="items.item.device_health_status == 2">Maintenance</span>
-                                </template> 
-                                <template v-slot:cell(action)="items">
+                                <template v-slot:cell(driver_info)="items">
+                                    <b>Name: </b> {{ items.item.driver_info.user_details.first_name }} {{ items.item.driver_info.user_details.last_name }}
+                                    <br/>
+                                    <b>Email: </b> {{ items.item.driver_info.email }}
+                                    <br/>
+                                    <b>Phone: </b> {{ items.item.driver_info.user_details.phone_number }}
+                                </template>
+                                
+                                <template v-slot:cell(service_package)="items">
+                                    {{ items.item.service_package.package_name }} ({{ items.item.service_package.subscription_fee }} Tk/Month)
+                                </template>
+                                <template v-slot:cell(device_info)="items">
+                                    {{ items.item.device_info.device_type.device_type_name }} <br/>
+                                    <b>IMEI:</b> {{ items.item.device_info.device_imei }}
+                                </template>
+                                <template v-slot:cell(installation_status)="items">
+                                    <span class="badge badge-soft-danger" v-if="items.item.installation_status == 0">Not Installed</span>
+                                    <span class="badge badge-soft-success" v-if="items.item.installation_status == 1">Installed</span>
+                                </template>
+                                <template v-slot:cell(payment_status)="items">
+                                    <span class="badge badge-soft-danger" v-if="items.item.payment_status == 0">Not Active</span>
+                                    <span class="badge badge-soft-success" v-if="items.item.payment_status == 1">Actived</span>
+                                </template>
+                                <template v-slot:cell(service_status)="items">
+                                    <span class="badge badge-soft-danger" v-if="items.item.service_status == 0">Not Started</span>
+                                    <span class="badge badge-soft-success" v-if="items.item.service_status == 1">Started</span>
+                                </template>
+                                <!-- <template v-slot:cell(action)="items">
                                     <div class="button-list">
                                         <nuxt-link 
-                                            :to="`/admin/devices/${items.item.id}/edit`" 
+                                            to="#" 
                                             v-b-tooltip.hover 
-                                            :title="`Edit Device ${items.item.device_imei}`" 
+                                            :title="`Edit Vehicle ${items.item.registration_number}`" 
                                             class="btn btn-sm btn-purple"
                                         >
                                             <i class="mdi mdi-circle-edit-outline"></i>
                                         </nuxt-link>
                                         <button 
-                                            v-if="items.item.device_use_status == 0"
                                             v-b-tooltip.hover 
-                                            :title="`Delete Device ${items.item.device_imei}`" 
+                                            :title="`Delete Vehicle ${items.item.registration_number}`" 
                                             type="button" 
                                             class="btn btn-sm btn-danger"
                                             @click="deleteHandler(items.item.id)"
@@ -75,7 +97,7 @@
                                             <i class="mdi mdi-delete"></i>
                                         </button> 
                                     </div>
-                                </template>
+                                </template> -->
                             </b-table>
                         </div>
                         <div class="row">
@@ -99,21 +121,21 @@
 import Loading from '@/components/common/Loading.vue';
 
 export default {
-    name: 'DeviceListPage',
-    middleware: ['auth', 'auth-admin'],
+    name: "VehicleListPage",
+    middleware: ["auth", "auth-customer"],
     components: {
         Loading
     },
     data() {
         return {
-            title: 'Device List',
+            title: "Vehicle List",
             items: [
                 {
-                    text: 'Dashobard',
-                    href: '/admin/dashboard/sales',
+                    text: "Dashobard",
+                    href: "#",
                 },
                 {
-                    text: 'Device List',
+                    text: "Vehicle List",
                     active: true,
                 },
             ],
@@ -125,102 +147,61 @@ export default {
             pageOptions: [10, 25, 50, 100],
             filter: null,
             filterOn: [],
-            sortBy: ['device_imei', 'device_sim'],
+            sortBy: "registration_number",
             sortDesc: false,
             fields: [
                 {
-                    label: 'Device IMEI',
-                    key: 'device_imei',
+                    label: 'Vehicle Type',
+                    key: 'vehicle_type'
+                },
+                {
+                    key: "registration_number",
                     sortable: true
                 },
                 {
-                    label: 'Device Type',
-                    key: 'device_type.device_type_name',
+                    key: "driver_info",
                     sortable: true
                 },
                 {
-                    label: 'Device SIM',
-                    key: 'device_sim',
+                    key: "service_package",
                     sortable: true
                 },
                 {
-                    label: 'Device SIM Type',
-                    key: 'device_sim_type',
-                    sortable: true,
-                    formatter: value => {
-                        if (value == 1) {
-                            return 'Pre Paid';
-                        } else if(value == 2) {
-                            return 'Post Paid';
-                        }
-                    }
-                },
-                {
-                    label: 'Use Status',
-                    key: 'device_use_status',
-                    sortable: true,
-                },
-                {
-                    label: 'Health Status',
-                    key: 'device_health_status',
+                    key: "device_info",
                     sortable: true
                 },
                 {
-                    key: 'action',
+                    key: "payment_status",
+                    sortable: true
+                },
+                {
+                    key: "action",
+                    sortable: true
                 },
             ],
-        }
+        };
     },
     head: {
-        titleTemplate: '%s Device List',
+        titleTemplate: "%s Vehicle List",
     },
     computed: {
         rows() {
-            return this.tableData.length
+            return this.tableData.length;
         }
     },
     created() {
-        this.getAllDevices();
+        this.getAllDeviceType();
     },
     methods: {
-        async getAllDevices() {
-            await this.$axios.get('admin/devices')
+        async getAllDeviceType() {
+            await this.$axios.get("customer/customer-vehicles")
                 .then((response) => {
                     this.loading = true;
-                    this.tableData = response.data.data
+                    this.tableData = response.data.data;
                     this.loading = false;
                 }).catch((error) => {
-                    console.log(error)
+                    console.log(error);
                 });
-        },
-        async deleteHandler(deleteId) {
-            this.$swal({
-                title: 'Are you sure?',
-                text: 'You can\'t revert your action',
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Yes Delete it!',
-                cancelButtonText: 'No, Keep it!',
-                showCloseButton: true,
-                showLoaderOnConfirm: true
-            }).then((result) => {
-                if (result.value) {
-                    this.$axios.delete(`admin/devices/${deleteId}`)
-                        .then((response) => {
-                            if (response.status == 202) {
-                                this.getAllDevices();
-                                this.$swal('Deleted', response.data.message, 'success')
-                            }
-                        }).catch((error) => {
-                            if (error.response.status == 404) {
-                                this.$toast.error(error.response.data.message);
-                            }
-                            console.log(error.response.data);
-                        });
-                } else {
-                    this.$swal('Cancelled', 'The Device still intact', 'info')
-                }
-            })
         }
     }
 }

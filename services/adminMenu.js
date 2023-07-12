@@ -34,18 +34,13 @@ export const adminMenu = [
   {
     id: 6,
     label: "menuitems.users.text",
-    icon: "ri-mail-line",
+    icon: " ri-group-fill",
     isMenuCollapsed: false,
     subItems: [
       {
-        id: 7,
-        label: "menuitems.users.list.create-user",
-        link: "/email/inbox",
-      },
-      {
         id: 8,
         label: "menuitems.users.list.all-users",
-        link: "/email/reademail/1",
+        link: "/admin/users",
       },
     ],
   },
@@ -57,18 +52,31 @@ export const adminMenu = [
   {
     id: 10,
     label: "menuitems.devices.text",
-    icon: "ri-mail-line",
+    icon: "ri-cast-fill",
     isMenuCollapsed: false,
     subItems: [
       {
         id: 11,
-        label: "menuitems.devices.list.create-device",
-        link: "/",
-      },
-      {
-        id: 12,
         label: "menuitems.devices.list.all-device",
         link: "/admin/devices",
+      },
+    ],
+  },
+  {
+    id: 12,
+    label: "menuitems.vehicle.text",
+    isTitle: true,
+  },
+  {
+    id: 13,
+    label: "menuitems.vehicles.text",
+    icon: "ri-car-fill",
+    isMenuCollapsed: false,
+    subItems: [
+      {
+        id: 14,
+        label: "menuitems.vehicles.list.all-vehicle",
+        link: "/admin/vehicles",
       },
     ],
   },
@@ -87,6 +95,16 @@ export const adminMenu = [
         id: 102,
         label: "menuitems.setting.list.device-type",
         link: "/admin/setting/device-type",
+      },
+      {
+        id: 103,
+        label: "menuitems.setting.list.vehicle-type",
+        link: "/admin/setting/vehicle-type",
+      },
+      {
+        id: 104,
+        label: "menuitems.setting.list.packages",
+        link: "/admin/setting/packages",
       },
     ],
   },

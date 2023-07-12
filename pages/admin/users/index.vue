@@ -3,7 +3,7 @@
         <AdminPageHeader :title="title" :items="items" />
         <div class="row mb-2">
             <div class="col-12">
-                <nuxt-link to="/admin/devices/add" class="btn btn-primary waves-effect waves-light float-right"><i class="fe-plus mr-1"></i>Add New</nuxt-link>
+                <nuxt-link to="/admin/users/add" class="btn btn-primary waves-effect waves-light float-right"><i class="fe-plus mr-1"></i>Add New</nuxt-link>
             </div>
         </div>
         <div class="row">
@@ -45,29 +45,39 @@
                                 :filter="filter" 
                                 :filter-included-fields="filterOn"
                             >
-                                <template v-slot:cell(device_use_status)="items">
-                                    <span class="badge badge-soft-success" v-if="items.item.device_use_status == 0">Not Used Yet</span>
-                                    <span class="badge badge-soft-danger" v-if="items.item.device_use_status == 1">Already Used</span>
+                                <template v-slot:cell(user_name)="items">
+                                    {{ items.item.user_details.first_name }} {{ items.item.user_details.last_name }}
                                 </template>
-                                <template v-slot:cell(device_health_status)="items">
-                                    <span class="badge badge-soft-danger" v-if="items.item.device_health_status == 0">Spoiled</span>
-                                    <span class="badge badge-soft-success" v-if="items.item.device_health_status == 1">Running</span>
-                                    <span class="badge badge-soft-warning" v-if="items.item.device_health_status == 2">Maintenance</span>
-                                </template> 
+                                <template v-slot:cell(user_email)="items">
+                                    {{ items.item.email }}{{ items.item.user_details.email_optional ? `, ${items.item.user_details.email_optional}` : '' }}
+                                </template>
+                                <template v-slot:cell(phone_number)="items">
+                                    {{ items.item.user_details.phone_number }}{{ items.item.user_details.phone_optional ? `, ${items.item.user_details.phone_optional}` : '' }}
+                                </template>
+                                <template v-slot:cell(user_status)="items">
+                                    <span class="badge badge-soft-danger" v-if="items.item.user_status == 0">Inactive</span>
+                                    <span class="badge badge-soft-success" v-if="items.item.user_status == 1">Active</span>
+                                    <span class="badge badge-soft-warning" v-if="items.item.user_status == 2">Suspended</span>
+                                </template>
+                                <template v-slot:cell(user_created_by)="items">
+                                    {{ items.item.created_by_user.user_details.first_name }} {{ items.item.created_by_user.user_details.last_name }} <br/>
+                                    {{ items.item.created_by_user.email }}
+                                </template>
                                 <template v-slot:cell(action)="items">
                                     <div class="button-list">
                                         <nuxt-link 
-                                            :to="`/admin/devices/${items.item.id}/edit`" 
+                                            v-if="items.item.id != 1"
+                                            :to="`/admin/users/${items.item.id}/edit`" 
                                             v-b-tooltip.hover 
-                                            :title="`Edit Device ${items.item.device_imei}`" 
+                                            :title="`Edit User ${items.item.user_details.first_name} ${items.item.user_details.last_name ? items.item.user_details.last_name : ''}`" 
                                             class="btn btn-sm btn-purple"
                                         >
                                             <i class="mdi mdi-circle-edit-outline"></i>
                                         </nuxt-link>
                                         <button 
-                                            v-if="items.item.device_use_status == 0"
+                                            v-if="items.item.id != 1"
                                             v-b-tooltip.hover 
-                                            :title="`Delete Device ${items.item.device_imei}`" 
+                                            :title="`Delete User ${items.item.user_details.first_name} ${items.item.user_details.last_name ? items.item.user_details.last_name : ''}`" 
                                             type="button" 
                                             class="btn btn-sm btn-danger"
                                             @click="deleteHandler(items.item.id)"
@@ -99,21 +109,21 @@
 import Loading from '@/components/common/Loading.vue';
 
 export default {
-    name: 'DeviceListPage',
+    name: 'UserListPage',
     middleware: ['auth', 'auth-admin'],
     components: {
         Loading
     },
     data() {
         return {
-            title: 'Device List',
+            title: 'User List',
             items: [
                 {
                     text: 'Dashobard',
                     href: '/admin/dashboard/sales',
                 },
                 {
-                    text: 'Device List',
+                    text: 'User List',
                     active: true,
                 },
             ],
@@ -125,44 +135,41 @@ export default {
             pageOptions: [10, 25, 50, 100],
             filter: null,
             filterOn: [],
-            sortBy: ['device_imei', 'device_sim'],
+            // sortBy: ['device_imei', 'device_sim'],
             sortDesc: false,
             fields: [
                 {
-                    label: 'Device IMEI',
-                    key: 'device_imei',
+                    label: 'User Name',
+                    key: 'user_name',
                     sortable: true
                 },
                 {
-                    label: 'Device Type',
-                    key: 'device_type.device_type_name',
+                    label: 'User Type',
+                    key: 'user_role.name',
                     sortable: true
                 },
                 {
-                    label: 'Device SIM',
-                    key: 'device_sim',
+                    label: 'User Email',
+                    key: 'user_email',
                     sortable: true
                 },
                 {
-                    label: 'Device SIM Type',
-                    key: 'device_sim_type',
-                    sortable: true,
-                    formatter: value => {
-                        if (value == 1) {
-                            return 'Pre Paid';
-                        } else if(value == 2) {
-                            return 'Post Paid';
-                        }
-                    }
-                },
-                {
-                    label: 'Use Status',
-                    key: 'device_use_status',
+                    label: 'User Phone',
+                    key: 'phone_number',
                     sortable: true,
                 },
                 {
-                    label: 'Health Status',
-                    key: 'device_health_status',
+                    label: 'Employee of',
+                    key: 'user_details.company_name',
+                },
+                {
+                    label: 'User Status',
+                    key: 'user_status',
+                    sortable: true,
+                },
+                {
+                    label: 'User Create',
+                    key: 'user_created_by',
                     sortable: true
                 },
                 {
@@ -172,7 +179,7 @@ export default {
         }
     },
     head: {
-        titleTemplate: '%s Device List',
+        titleTemplate: '%s User List',
     },
     computed: {
         rows() {
@@ -180,47 +187,48 @@ export default {
         }
     },
     created() {
-        this.getAllDevices();
+        this.getAllUsers();
     },
     methods: {
-        async getAllDevices() {
-            await this.$axios.get('admin/devices')
+        async getAllUsers() {
+            await this.$axios.get('admin/users')
                 .then((response) => {
                     this.loading = true;
-                    this.tableData = response.data.data
+                    this.tableData = response.data.data;
                     this.loading = false;
                 }).catch((error) => {
                     console.log(error)
                 });
         },
         async deleteHandler(deleteId) {
-            this.$swal({
-                title: 'Are you sure?',
-                text: 'You can\'t revert your action',
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Yes Delete it!',
-                cancelButtonText: 'No, Keep it!',
-                showCloseButton: true,
-                showLoaderOnConfirm: true
-            }).then((result) => {
-                if (result.value) {
-                    this.$axios.delete(`admin/devices/${deleteId}`)
-                        .then((response) => {
-                            if (response.status == 202) {
-                                this.getAllDevices();
-                                this.$swal('Deleted', response.data.message, 'success')
-                            }
-                        }).catch((error) => {
-                            if (error.response.status == 404) {
-                                this.$toast.error(error.response.data.message);
-                            }
-                            console.log(error.response.data);
-                        });
-                } else {
-                    this.$swal('Cancelled', 'The Device still intact', 'info')
-                }
-            })
+            console.log(deleteId);
+            // this.$swal({
+            //     title: 'Are you sure?',
+            //     text: 'You can\'t revert your action',
+            //     type: 'warning',
+            //     showCancelButton: true,
+            //     confirmButtonText: 'Yes Delete it!',
+            //     cancelButtonText: 'No, Keep it!',
+            //     showCloseButton: true,
+            //     showLoaderOnConfirm: true
+            // }).then((result) => {
+            //     if (result.value) {
+            //         this.$axios.delete(`admin/devices/${deleteId}`)
+            //             .then((response) => {
+            //                 if (response.status == 202) {
+            //                     this.getAllDevices();
+            //                     this.$swal('Deleted', response.data.message, 'success')
+            //                 }
+            //             }).catch((error) => {
+            //                 if (error.response.status == 404) {
+            //                     this.$toast.error(error.response.data.message);
+            //                 }
+            //                 console.log(error.response.data);
+            //             });
+            //     } else {
+            //         this.$swal('Cancelled', 'The Device still intact', 'info')
+            //     }
+            // });
         }
     }
 }

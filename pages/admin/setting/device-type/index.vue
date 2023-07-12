@@ -7,7 +7,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12">
+            <div class="col-12" v-if="loading">
+                <Loading />
+            </div>
+            <div class="col-12" v-else>
                 <div class="card">
                     <div class="card-body">
                         <p class="text-muted font-13 mb-4"></p>
@@ -44,6 +47,10 @@
                                 :filter="filter" 
                                 :filter-included-fields="filterOn"
                             >
+                                <template v-slot:cell(number_of_device)="items">
+                                    {{ items.item.devices.length }}
+                                </template>
+
                                 <template v-slot:cell(action)="items">
                                     <div class="button-list">
                                         <nuxt-link 
@@ -85,9 +92,14 @@
 </template>
 
 <script>
+import Loading from '@/components/common/Loading.vue';
+
 export default {
     name: 'DeviceTypeListPage',
     middleware: ['auth', 'auth-admin'],
+    components: {
+        Loading
+    },
     data() {
         return {
             title: 'Device Type List',
@@ -100,10 +112,11 @@ export default {
                     href: '#'
                 },
                 {
-                    text: 'Device List',
+                    text: 'Device Type List',
                     active: true,
                 },
             ],
+            loading: false,
             tableData: [],
             totalRows: 1,
             currentPage: 1,
@@ -119,6 +132,10 @@ export default {
                     sortable: true
                 },
                 {
+                    label: 'Number of Device',
+                    key: 'number_of_device'
+                },
+                {
                     key: 'device_configure_text',
                     sortable: true
                 },
@@ -130,7 +147,7 @@ export default {
         }
     },
     head: {
-        titleTemplate: '%s Device List',
+        titleTemplate: '%s Device Type List',
     },
     computed: {
         rows() {
@@ -143,9 +160,9 @@ export default {
     methods: {
         async getAllDeviceType() {
             await this.$axios.get('admin/device-types').then((response) => {
-                this.$nuxt.$loading.start();
+                this.loading = true;
                 this.tableData = response.data.data;
-                this.$nuxt.$loading.finish();
+                this.loading = false;
             }).catch((error) => {
                 console.log(error)
             })

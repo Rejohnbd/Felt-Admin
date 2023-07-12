@@ -1,5 +1,8 @@
 <template>
-    <div>
+    <div v-if="$nuxt.isOffline">
+        <Offline />
+    </div>
+    <div v-else>
         <Vertical v-if="layout.layoutType === 'vertical'" :layout="layout.layoutType">
             <Nuxt />
         </Vertical>
@@ -9,7 +12,7 @@
         </Detached>
 
         <TwoColumn v-if="layout.layoutType === 'two-column'" :layout="layout.layoutType"> 
-        <slot />
+            <slot />
         </TwoColumn>
     </div>
 </template>
@@ -19,6 +22,7 @@
     import Vertical from "./vertical";
     import Detached from "./detached";
     import TwoColumn from "./two-column";
+    import Offline from '@/components/common/Offline.vue'
 
     export default {
         middleware: 'auth',
@@ -26,6 +30,7 @@
             Vertical,
             Detached,
             TwoColumn,
+            Offline
         },
         data() {
             return {

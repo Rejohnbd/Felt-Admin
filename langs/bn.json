@@ -101,6 +101,7 @@
         "list": {
           "greet": "স্বাগত!",
           "account": "আমার অ্যাকাউন্ট",
+          "profile": "আমার প্রোফাইল",
           "mywallet": "আমার মানিব্যাগ",
           "settings": "সেটিংস",
           "lockscreen": "বন্ধ পর্দা",
@@ -127,13 +128,42 @@
     "users": {
       "text": "ব্যবহারকারী গন",
       "list": {
-        "create-user": "ব্যবহারকারী তৈরি করুন",
         "all-users": "সকল ব্যবহারকারী"
       }
     },
     "device": {
-      "text": "যন্ত্র"
-    }
+      "text": "ডিভাইস"
+    },
+    "devices": {
+      "text": "ডিভাইস",
+      "list": {
+        "all-device": "সমস্ত ডিভাইস"
+      }
+    },
+    "vehicle": {
+      "text": "যানবাহন"
+    },
+    "vehicles": {
+      "text": "যানবাহন",
+      "list": {
+        "all-vehicle": "সমস্ত যানবাহন"
+      }
+    },
+    "drivers": {
+      "text": "ড্রাইভার",
+      "list": {
+        "all-driver": "সব ড্রাইভার"
+      }
+    },
+    "setting": {
+      "text": "সেটিংস",
+      "list": {
+        "device-type": "ডিভাইসের ধরন",
+        "vehicle-type": "গাড়ির ধরন",
+        "packages": "প্যাকেজ",
+        "profile": "প্রোফাইল"
+      }
+    }  
   },
    "about-us": "আমাদের সম্পর্কে",
    "help": "সাহায্য",

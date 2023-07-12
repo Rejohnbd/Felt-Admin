@@ -1,8 +1,6 @@
 <template>
-    <div id="preloader" v-if="loading">
-        <div class="card-portlets-loader">
-            <div class="spinner-border text-primary m-2" role="status"></div>
-        </div>
+    <div class="card-portlets-loader text-center">
+        <div class="spinner-border text-primary m-2" role="status"></div>
     </div>
 </template>
 
@@ -13,6 +11,7 @@
         }),
         methods: {
             start() {
+                console.log('called')
                 this.loading = true;
             },
             finish() {
