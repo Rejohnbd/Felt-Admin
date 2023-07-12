@@ -101,6 +101,7 @@
         "list": {
           "greet": "Welcome !",
           "account": "My Account",
+          "profile": "My Profile",
           "mywallet": "My Wallet",
           "settings": "Settings",
           "lockscreen": "Lock screen",
@@ -128,7 +129,6 @@
     "users": {
       "text": "Users",
       "list": {
-        "create-user": "Create User",
         "all-users": "All Users"
       }
     },
@@ -138,8 +138,22 @@
     "devices": {
       "text": "Devices",
       "list": {
-        "create-device": "Create Device",
         "all-device": "All Device"
+      }
+    },
+    "vehicle": {
+      "text": "Vehicle"
+    },
+    "vehicles": {
+      "text": "Vehicle",
+      "list": {
+        "all-vehicle": "All Vehicle"
+      }
+    },
+    "drivers": {
+      "text": "Drivers",
+      "list": {
+        "all-driver": "All Driver"
       }
     },
     "setting": {
@@ -147,7 +161,8 @@
       "list": {
         "device-type": "Device Type",
         "vehicle-type": "Vehicle Type",
-        "packages": "Packages"
+        "packages": "Packages",
+        "profile": "Profile"
       }
     }
   },

@@ -5,15 +5,15 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">Add User</h4>
+                        <h4 class="header-title">Edit User</h4>
                         <div class="row">
                             <div class="col-12">
                                 <div class="p-2">
-                                    <UserCreateForm
-                                        v-on:mounted="initCreate"
-                                        ref="addUserForm"
-                                        v-on:form-submitted="create"
-                                        operation="create"
+                                    <UserEditForm
+                                        v-on:mounted="initEdit"
+                                        ref="editUserForm"
+                                        v-on:form-submitted="update"
+                                        operation="edit"
                                         :submitLoading="submitLoading"
                                     />
                                 </div>
@@ -27,17 +27,17 @@
 </template>
 
 <script>
-import UserCreateForm from '@/components/admin/users/UserCreateForm.vue';
+import UserEditForm from '@/components/admin/users/UserEditForm.vue';
 
 export default {
-    name: 'AddUserPage',
+    name: 'EditUserPage',
     middleware: ['auth', 'auth-admin'],
     components: {
-        UserCreateForm
+        UserEditForm
     },
     data() {
         return {
-            title: 'User Add',
+            title: 'User Edit',
             items: [
                 {
                     text: 'Dashobard',
@@ -48,7 +48,7 @@ export default {
                     href: '#'
                 },
                 {
-                    text: 'User Add',
+                    text: 'User Edit',
                     active: true,
                 },
             ],
@@ -56,19 +56,21 @@ export default {
         }
     },
     head: {
-        titleTemplate: '%s User Add',
+        titleTemplate: '%s User Edit',
     },
     methods: {
-        initCreate() {
-            this.$refs.addUserForm.getUserRoles();
-            this.$refs.addUserForm.getCustomerUsers();
+        initEdit() {
+            this.$refs.editUserForm.getUserRoles();
+            this.$refs.editUserForm.getCustomerUsers();
+            this.$refs.editUserForm.getcustomerById();
         },
-        async create(data) {
+        async update(data) {
             this.submitLoading = true;
             try {
-                await this.$axios.post('admin/users', data)
+                await this.$axios.post('admin/users-update', data)
                     .then((response) => {
                         if(response.status == 201) {
+                            console.log(response.data);
                             this.$swal("Success!", response.data.message, "success");
                             this.$router.push({
                                 path: "/admin/users"
@@ -80,7 +82,6 @@ export default {
                         } 
                         console.log(error.response.data);
                     });
-
             } catch (error) {
                 this.$toast.error("Connection Error");
                 console.log('Connection Error:', error);
