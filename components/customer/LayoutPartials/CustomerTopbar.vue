@@ -2,7 +2,7 @@
     <div class="navbar-custom">
         <div class="container-fluid">
             <ul class="list-unstyled topnav-menu float-right mb-0">
-                <li class="d-none d-lg-block">
+                <!-- <li class="d-none d-lg-block">
                     <form class="app-search">
                         <div class="app-search-box">
                             <div class="input-group">
@@ -14,10 +14,10 @@
                                 </div>
                             </div>
                         </div>
-                    </form>
-                </li>
+                    </form> 
+                </li> -->
 
-                <li class="dropdown d-inline-block d-lg-none">
+                <!-- <li class="dropdown d-inline-block d-lg-none">
                     <a 
                         class="nav-link dropdown-toggle arrow-none waves-effect waves-light" 
                         data-toggle="dropdown"
@@ -38,7 +38,7 @@
                             />
                         </form>
                     </div>
-                </li>
+                </li> -->
 
                 <li class="dropdown d-none d-lg-inline-block">
                     <a 
@@ -51,7 +51,7 @@
                     </a>
                 </li>
 
-                <b-nav-item-dropdown 
+                <!--<b-nav-item-dropdown 
                     variant="white" 
                     class="d-none d-lg-inline-block topbar-dropdown"
                     toggle-class="nav-link" 
@@ -103,7 +103,7 @@
                             </div>
                         </div>
                     </div>
-                </b-nav-item-dropdown>
+                </b-nav-item-dropdown> -->
 
                 <b-nav-item-dropdown variant="white" class="d-none d-lg-inline-block" right toggle-class="header-item">
                     <template v-slot:button-content>
@@ -254,12 +254,12 @@
                     </a>
                 </b-nav-item-dropdown>
 
-                <li class="dropdown notification-list">
+                <!-- <li class="dropdown notification-list">
                     <a href="javascript:void(0);" @click="toggleRightSidebar"
                         class="nav-link right-bar-toggle toggle-right">
                         <i class="fe-settings noti-icon toggle-right"></i>
                     </a>
-                </li>
+                </li> -->
             </ul>
 
             <div class="logo-box">
@@ -301,7 +301,7 @@
                         </div>
                     </a>
                 </li>
-                <b-nav-item-dropdown class="d-none d-lg-block">
+                <!--<b-nav-item-dropdown class="d-none d-lg-block">
                     <template slot="button-content">
                         {{ $t('navbar.dropdown.createnew.text') }}
                         <i class="mdi mdi-chevron-down"></i>
@@ -326,9 +326,9 @@
                         <i class="fe-headphones mr-1"></i>
                         <span>{{ $t('navbar.dropdown.createnew.list.help') }}</span>
                     </b-dropdown-item>
-                </b-nav-item-dropdown>
+                </b-nav-item-dropdown> -->
 
-                <b-nav-item-dropdown class="dropdown-mega d-none d-xl-block" variant="black" menu-class="dropdown-megamenu">
+                <!--<b-nav-item-dropdown class="dropdown-mega d-none d-xl-block" variant="black" menu-class="dropdown-megamenu">
                     <template v-slot:button-content>
                         {{ $t('navbar.dropdown.megamenu.text') }}
                         <i class="mdi mdi-chevron-down"></i>
@@ -475,7 +475,7 @@
                             </div>
                         </div>
                     </div>
-                </b-nav-item-dropdown>
+                </b-nav-item-dropdown> -->
             </ul>
             <div class="clearfix"></div>
         </div>

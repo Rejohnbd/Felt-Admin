@@ -7,7 +7,7 @@
                     <!-- <span class="logo-lg-text-light">Minton</span> -->
                 </span>
                 <span class="logo-lg">
-                    <img src="~/assets/images/logo-dark.png" alt height="20" />
+                    <img src="~/assets/images/logo-dark.png" alt height="50" />
                     <!-- <span class="logo-lg-text-light">M</span> -->
                 </span>
             </nuxt-link>
@@ -17,7 +17,7 @@
                     <img src="~/assets/images/logo-sm.png" alt height="24" />
                 </span>
                 <span class="logo-lg">
-                    <img src="~/assets/images/logo-light.png" alt height="20" />
+                    <img src="~/assets/images/logo-light.png" alt height="50" />
                 </span>
             </nuxt-link>
         </div>
