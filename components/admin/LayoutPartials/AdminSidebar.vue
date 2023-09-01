@@ -7,7 +7,7 @@
                     <!-- <span class="logo-lg-text-light">Minton</span> -->
                 </span>
                 <span class="logo-lg">
-                    <img src="~/assets/images/logo-dark.png" alt height="20" />
+                    <img src="~/assets/images/logo-dark.png" alt height="50" />
                     <!-- <span class="logo-lg-text-light">M</span> -->
                 </span>
             </nuxt-link>
@@ -17,7 +17,7 @@
                     <img src="~/assets/images/logo-sm.png" alt height="24" />
                 </span>
                 <span class="logo-lg">
-                    <img src="~/assets/images/logo-light.png" alt height="20" />
+                    <img src="~/assets/images/logo-light.png" alt height="50" />
                 </span>
             </nuxt-link>
         </div>
@@ -27,9 +27,10 @@
                 <img src="~/assets/images/users/avatar-1.jpg" alt="user-img" title="Mat Helme"
                     class="rounded-circle avatar-md" />
                 <div class="dropdown">
-                    <a href="javascript: void(0);" class="text-reset dropdown-toggle h5 mt-2 mb-1 d-block"
-                        data-toggle="dropdown">Nik Patel</a>
-                    <div class="dropdown-menu user-pro-dropdown">
+                    <a href="javascript: void(0);" class="text-reset dropdown-toggle h5 mt-2 mb-1 d-block" data-toggle="dropdown">
+                        {{ this.$auth.user.user_details.first_name + ' ' + (this.$auth.user.user_details.last_name ? this.$auth.user.user_details.last_name : '') }}
+                    </a>
+                    <!-- <div class="dropdown-menu user-pro-dropdown">
                         <a href="javascript:void(0);" class="dropdown-item notify-item">
                             <i class="fe-user mr-1"></i>
                             <span>My Account</span>
@@ -49,9 +50,9 @@
                             <i class="fe-log-out mr-1"></i>
                             <span>Logout</span>
                         </a>
-                    </div>
+                    </div> -->
                 </div>
-                <p class="text-reset">Admin Head</p>
+                <!-- <p class="text-reset">Admin Head</p> -->
             </div>
 
             <div id="sidebar-menu">
