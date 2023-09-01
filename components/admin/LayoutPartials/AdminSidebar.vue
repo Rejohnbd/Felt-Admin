@@ -52,7 +52,7 @@
                         </a>
                     </div> -->
                 </div>
-                <!-- <p class="text-reset">Admin Head</p> -->
+                <p class="text-reset">{{ this.$auth.user.email }}</p>
             </div>
 
             <div id="sidebar-menu">
