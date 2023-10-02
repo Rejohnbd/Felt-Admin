@@ -25,6 +25,7 @@ export default {
     "~/plugins/axios.js",
     "~/plugins/vue-click-outside.js",
     "~/plugins/vuelidate.js",
+    "~/plugins/vue-googlemap.js",
   ],
 
   // ENV variables: https://nuxtjs.org/tutorials/moving-from-nuxtjs-dotenv-to-runtime-config/

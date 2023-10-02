@@ -47,7 +47,7 @@ export const customerMenu = [
   {
     id: 8,
     label: "menuitems.drivers.text",
-    icon: " ri-group-fill",
+    icon: "ri-group-fill",
     isMenuCollapsed: false,
     subItems: [
       {
@@ -56,6 +56,12 @@ export const customerMenu = [
         link: "/customer/drivers",
       },
     ],
+  },
+  {
+    id: 10,
+    label: "menuitems.map.text",
+    icon: "ri-map-pin-line",
+    link: "/customer/map",
   },
   {
     id: 100,
